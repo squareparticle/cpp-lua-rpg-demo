@@ -1,0 +1,9 @@
+init:
+  type: playerBattle
+  sprite: battlePlayer
+  animation: idle
+  x: 0
+  y: 0
+  scale: 1
+  active: true
+  moves: [strike]

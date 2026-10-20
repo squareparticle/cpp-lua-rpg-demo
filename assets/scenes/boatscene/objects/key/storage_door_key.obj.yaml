@@ -1,0 +1,19 @@
+layer: actors
+
+init:
+  id: storageDoorKeyObj
+  type: interactable
+  sprite: storageDoorKey
+  animation: idle
+  x: 530
+  y: 700
+  scale: 1
+  sortPointY: 40
+  triggers:
+    interaction: { shape: circle, x: 10, y: 35, radius: 70 }
+  promptSprite: interactionPrompt
+  promptAnimation: idle
+  promptScale: 0.04
+  hooks:
+    INTERACT:
+      script: assets/scenes/boatscene/objects/key/pickup.lua

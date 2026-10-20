@@ -1,0 +1,15 @@
+init:
+  type: interactable
+  sprite: storageDoor
+  animation: idle
+  x: 0
+  y: 0
+  scale: 1
+  triggers:
+    interaction: { shape: rect, x: -51, y: 92, width: 130, height: 180 }
+  promptSprite: interactionPrompt
+  promptAnimation: idle
+  promptScale: 0.04
+  hooks:
+    INTERACT:
+      script: assets/scenes/boatscene/objects/door/interact.lua

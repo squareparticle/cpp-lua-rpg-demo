@@ -1,0 +1,8 @@
+init:
+  type: spriteObject
+  sprite: helm
+  animation: idle
+  x: 0
+  y: 0
+  scale: 1
+  sortPointY: 73

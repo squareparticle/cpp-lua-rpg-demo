@@ -1,0 +1,40 @@
+scene:
+  id: battleArena
+  music: battleMusic
+
+resources:
+  images:
+    - { id: battleBackground, path: assets/scenes/battlearena/background.png }
+  sounds:
+    - { id: battleStart, path: assets/sounds/attacked.wav }
+    - { id: battleVictory, path: assets/sounds/victory1.wav }
+    - { id: strikeImpact, path: assets/sounds/swordhit1.wav }
+    - { id: swordStrikeImpact, path: assets/sounds/swordhit2.wav }
+    - { id: clubStrikeImpact, path: assets/sounds/swordhit3.wav }
+  sprites:
+    - { id: battlePlayer, path: assets/battle/characters/player/player.anim.yaml }
+    - { id: goblinSword, path: assets/battle/characters/goblin_sword/goblin_sword.anim.yaml }
+    - { id: goblinClub, path: assets/battle/characters/goblin_club/goblin_club.anim.yaml }
+  objects:
+    - { id: battlePlayerObj, path: assets/battle/characters/player/player_battle.obj.yaml }
+    - { id: goblinSword, path: assets/battle/characters/goblin_sword/goblin_sword.obj.yaml }
+    - { id: goblinClub, path: assets/battle/characters/goblin_club/goblin_club.obj.yaml }
+  battleMoves:
+    - { id: strike, path: assets/battle/moves/strike.move.yaml }
+    - { id: swordStrike, path: assets/battle/moves/sword_strike.move.yaml }
+    - { id: clubStrike, path: assets/battle/moves/club_strike.move.yaml }
+
+layers:
+  background:
+    type: Image
+    items:
+      # Native-size centered crop: (1448 - 1280) / 2, (1086 - 720) / 2.
+      - { image: battleBackground, x: -84, y: -183 }
+
+  combatants:
+    type: Object
+    objects:
+      - { obj: battlePlayerObj, x: 155, y: 245, scale: 0.36 }
+      # active: true is the fallback used when config starts here directly.
+      - { obj: goblinSword, x: 925, y: 225, scale: 0.32, active: true }
+      - { obj: goblinClub, x: 1040, y: 280, scale: 0.32, active: true }

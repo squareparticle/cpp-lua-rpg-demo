@@ -1,0 +1,13 @@
+effect: damage
+target: opponent
+power: 1.0
+mpCost: 0
+
+animations:
+  actor: attack
+  target: hitPhysical
+  # Zero-based frame in the actor animation where damage is applied once.
+  impactFrame: 3
+
+sounds:
+  impact: strikeImpact

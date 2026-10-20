@@ -1,0 +1,16 @@
+image: assets/battle/characters/player/player.png
+
+sheet:
+  rows: 1
+  columns: 6
+
+animations:
+  idle:
+    fps: 1
+    cells: [0]
+  attack:
+    fps: 8
+    cells: [0, 1, 2, 3, 4, 5]
+  hitPhysical:
+    fps: 8
+    cells: [1, 0]

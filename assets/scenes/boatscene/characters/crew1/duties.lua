@@ -1,0 +1,2 @@
+-- Crew member one keeps watch at their station. Future autonomous work
+-- belongs here; scene cutscenes are launched separately by scene Lua.

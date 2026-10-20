@@ -1,0 +1,10 @@
+scene:
+  id: ending
+  initScript: assets/scenes/ending/init.lua
+
+resources:
+  images: []
+  sounds:
+    - { id: endingVictory, path: assets/sounds/victory1.wav }
+
+layers: {}

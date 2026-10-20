@@ -1,0 +1,13 @@
+init:
+  type: enemy
+  sprite: goblinSword
+  animation: idle
+  x: 0
+  y: 0
+  scale: 1
+  active: false
+  level: 1
+  moves: [swordStrike]
+  battleScript: assets/battle/characters/goblin_sword/goblin_sword.battle.lua
+  rewards: { experience: 12, items: [rustyDagger] }
+  stats: { name: Goblin A, maxHp: 30, maxMp: 0, attack: 8, defense: 2 }

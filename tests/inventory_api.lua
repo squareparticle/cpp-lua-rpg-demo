@@ -1,0 +1,12 @@
+assert(not HasInventoryItem("storage_door_key"))
+assert(AddInventoryItem("storage_door_key"))
+assert(HasInventoryItem("storage_door_key"))
+assert(not AddInventoryItem("storage_door_key"))
+assert(RemoveInventoryItem("storage_door_key"))
+assert(not HasInventoryItem("storage_door_key"))
+assert(not RemoveInventoryItem("storage_door_key"))
+
+local acceptedEmptyId = pcall(function()
+    AddInventoryItem("")
+end)
+assert(not acceptedEmptyId)

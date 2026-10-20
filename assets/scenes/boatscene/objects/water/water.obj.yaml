@@ -1,0 +1,14 @@
+init:
+  id: waterObj
+  type: scrollingSurface
+  sprite: water
+  alternateSprite: waterFlipped
+  crossfadeSeconds: 1.5
+  crossfadeStrength: 0.35
+  animation: idle
+  x: 0
+  y: 0
+  speedX: 0
+  speedY: -20
+
+layer: water

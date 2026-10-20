@@ -1,0 +1,42 @@
+rules:
+  - when:
+      all:
+        - shipFinale_complete
+    script: assets/scenes/boatscene/characters/crew3/dialog_complete.lua
+
+  - when:
+      all:
+        - mission_storageLantern
+        - storageLantern_fairies_released
+    script: assets/scenes/boatscene/characters/crew3/dialog_fairies.lua
+
+  - when:
+      all:
+        - mission_storageLantern
+        - storageLantern_has_lantern
+    script: assets/scenes/boatscene/characters/crew3/dialog_has_lantern.lua
+
+  - when:
+      all:
+        - mission_storageLantern
+        - storageBattle_triggered
+    script: assets/scenes/boatscene/characters/crew3/dialog_after_battle.lua
+
+  - when:
+      all:
+        - mission_storageLantern
+        - storageLantern_door_open
+    script: assets/scenes/boatscene/characters/crew3/dialog_door_open.lua
+
+  - when:
+      all:
+        - mission_storageLantern
+        - storageLantern_has_doorKey
+    script: assets/scenes/boatscene/characters/crew3/dialog_has_key.lua
+
+  - when:
+      all:
+        - mission_storageLantern
+    script: assets/scenes/boatscene/characters/crew3/dialog_rain.lua
+
+  - script: assets/scenes/boatscene/characters/crew3/dialog_idle.lua

@@ -1,0 +1,4 @@
+name: Guiding Lantern
+description: A warm golden lantern said to guide ships safely through Hell's Gate.
+value: 0
+useScript: assets/items/guiding_lantern.lua

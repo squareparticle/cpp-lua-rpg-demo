@@ -1,0 +1,17 @@
+init:
+  id: guidingLanternObj
+  type: interactable
+  sprite: guidingLantern
+  animation: idle
+  x: 0
+  y: 0
+  scale: 0.08
+  sortPointY: 1173
+  triggers:
+    interaction: { shape: circle, x: 627, y: 616, radius: 1900 }
+  promptSprite: interactionPrompt
+  promptAnimation: idle
+  promptScale: 0.04
+  hooks:
+    INTERACT:
+      script: assets/scenes/storageroom/objects/lantern/pickup.lua

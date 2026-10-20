@@ -1,0 +1,57 @@
+scene:
+  id: storageRoom
+  initScript: assets/scenes/storageroom/init.lua
+  music: shipMusic
+
+camera:
+  target: playerObj
+  window: { x: 0, y: 0, width: 1254, height: 1254 }
+
+playerSpawnPoints:
+  mainDoor: { x: 575, y: 700 }
+
+groundRegions:
+  storageBattle:
+    color: "00FF00"
+    behavior: trigger
+    hook: assets/scenes/storageroom/start_battle.lua
+  boatDoor:
+    color: "FF0000"
+    behavior: warp
+    parameters:
+      destination: boatScene
+      playerSpawnPoint: storageDoor
+
+resources:
+  images:
+    - { id: background, path: assets/scenes/storageroom/background.png }
+    - { id: foreground, path: assets/scenes/storageroom/foreground.png }
+  collisionMasks:
+    - { id: walkableArea, path: assets/scenes/storageroom/mask.png }
+  sounds:
+    - { id: lanternPickup, path: assets/sounds/powerup1.wav }
+  sprites:
+    - { id: guidingLantern, path: assets/scenes/storageroom/objects/lantern/lantern.anim.yaml }
+    - { id: interactionPrompt, path: assets/fx/interaction_prompt.anim.yaml }
+    - { id: player, path: assets/world/characters/player/player.anim.yaml }
+  objects:
+    - { id: guidingLanternObj, path: assets/scenes/storageroom/objects/lantern/guiding_lantern.obj.yaml }
+    - { id: playerObj, path: assets/world/characters/player/player.obj.yaml }
+
+layers:
+  roomFloor:
+    type: Image
+    items:
+      - { image: background, x: 0, y: 0 }
+
+  actors:
+    type: Object
+    sort: y
+    objects:
+      - { obj: guidingLanternObj, x: 585, y: 225 }
+      - { obj: playerObj, x: 575, y: 700 }
+
+  roomForeground:
+    type: Image
+    items:
+      - { image: foreground, x: 0, y: 0 }

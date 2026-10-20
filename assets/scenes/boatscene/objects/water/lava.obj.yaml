@@ -1,0 +1,11 @@
+layer: lavaOverlay
+
+init:
+  id: lavaObj
+  type: scrollingSurface
+  sprite: lava
+  animation: idle
+  x: 0
+  y: 0
+  speedX: 0
+  speedY: -20

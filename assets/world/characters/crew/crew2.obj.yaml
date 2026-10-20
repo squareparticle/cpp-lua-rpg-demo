@@ -1,0 +1,16 @@
+init:
+  type: interactable
+  sprite: crew
+  animation: idleDown
+  x: 0
+  y: 0
+  scale: 0.45
+  sortPointY: 300
+  triggers:
+    interaction: { shape: circle, x: 119, y: 300, radius: 356 }
+  promptSprite: interactionPrompt
+  promptAnimation: idle
+  promptScale: 0.04
+  hooks:
+    INTERACT:
+      ruleTable: assets/scenes/boatscene/characters/crew2/dialog.rules.yaml

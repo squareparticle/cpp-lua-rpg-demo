@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en" data-theme="blueprint">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Theme experiment for the RPG2002-Ship Architecture Atlas: Shipwright's Blueprint.">
+  <title>Shipwright's Blueprint · Atlas style test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+  <style>
+    /* ---- shared layout (identical across style tests) ---- */
+    :root { --sidebar-w: 268px; --topbar-h: 68px; --content-w: 920px; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--topbar-h) + 1.5rem); -webkit-text-size-adjust: 100%; }
+    body { margin: 0; min-width: 320px; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16.5px; line-height: 1.65; }
+    img { max-width: 100%; }
+    h1, h2, h3, p { margin-top: 0; }
+    .skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 50; padding: .6rem 1rem; background: var(--ink); color: var(--bg); }
+    .skip-link:focus { top: 1rem; }
+    :focus-visible { outline: 3px solid var(--focus, var(--accent)); outline-offset: 3px; }
+
+    .topbar { position: fixed; inset: 0 0 auto; z-index: 20; height: var(--topbar-h); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 1.5rem; }
+    .brand { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; color: inherit; }
+    .brand-mark { display: grid; place-items: center; flex: 0 0 auto; width: 40px; height: 40px; }
+    .brand-text strong, .brand-text small { display: block; line-height: 1.2; }
+    .top-links { display: flex; gap: .25rem; }
+    .top-links a { padding: .45rem .8rem; text-decoration: none; }
+
+    .layout { padding-top: var(--topbar-h); }
+    .sidebar { position: fixed; top: var(--topbar-h); bottom: 0; left: 0; width: var(--sidebar-w); overflow-y: auto; padding: 1.5rem 1rem 6rem; }
+    .nav-group { margin-bottom: 1.35rem; }
+    .nav-label { margin: 0 .75rem .45rem; }
+    .sidebar a { display: block; padding: .48rem .75rem; text-decoration: none; }
+
+    main { margin-left: var(--sidebar-w); padding: 3rem clamp(1.25rem, 5vw, 4.5rem) 7rem; outline: none; }
+    .page { max-width: var(--content-w); margin: 0 auto; }
+    .page > * + * { margin-top: 2.75rem; }
+
+    .page-hero h1 { margin: .35rem 0 .9rem; }
+    .lede { max-width: 46rem; margin-bottom: 1.4rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: .6rem 1.6rem; margin: 0; padding: 0; list-style: none; }
+    .meta li { display: flex; align-items: center; gap: .55rem; }
+
+    .diagram { margin-left: 0; margin-right: 0; }
+    .diagram-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: .4rem .9rem; }
+    .fig-open { margin-left: auto; text-decoration: none; }
+    .diagram-frame img { display: block; width: 100%; height: auto; }
+
+    .prose p { max-width: 44rem; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; vertical-align: top; padding: .8rem 1rem; }
+
+    .callout p { margin: 0; }
+    .steps { margin: 1.2rem 0 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: .75rem; }
+    .steps li { counter-increment: step; position: relative; display: grid; gap: .15rem; padding-left: 3.2rem; }
+    .steps li::before { content: counter(step); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 2.1rem; height: 2.1rem; }
+
+    .code-block { margin-left: 0; margin-right: 0; overflow: hidden; }
+    .code-block figcaption { display: flex; justify-content: space-between; gap: 1rem; }
+    .code-block pre { margin: 0; overflow-x: auto; }
+
+    .sources dl { margin: 0; display: grid; }
+    .sources dl > div { display: grid; grid-template-columns: minmax(10rem, 13rem) 1fr; gap: 1rem; padding: .75rem 0; }
+    .sources dt, .sources dd { margin: 0; }
+    .sources dd { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .card { display: flex; flex-direction: column; gap: .35rem; padding: 1.2rem; text-decoration: none; color: inherit; }
+    .card p { margin: 0; flex: 1; }
+    .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .pager a { display: flex; flex-direction: column; padding: 1rem 1.2rem; text-decoration: none; }
+    .pager .next-link { text-align: right; }
+
+    .theme-switch { position: fixed; right: 1rem; bottom: 1rem; z-index: 30; display: flex; flex-wrap: wrap; align-items: center; gap: .3rem; max-width: calc(100% - 2rem); padding: .4rem; border-radius: 12px; background: #111; color: #ddd; font: 600 12px/1 system-ui, sans-serif; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+    .theme-switch span { padding: 0 .5rem; color: #999; text-transform: uppercase; letter-spacing: .08em; font-size: 10px; }
+    .theme-switch a { padding: .45rem .6rem; border-radius: 8px; color: #ddd; text-decoration: none; }
+    .theme-switch a:hover { background: #2a2a2a; }
+    .theme-switch a[aria-current] { background: #fff; color: #111; }
+
+    @media (max-width: 900px) {
+      :root { --sidebar-w: 0px; }
+      .top-links { display: none; }
+      .sidebar { position: sticky; top: var(--topbar-h); z-index: 15; width: 100%; height: auto; overflow-x: auto; overflow-y: hidden; padding: .55rem .75rem; display: block; }
+      .sidebar nav { display: flex; gap: .25rem; }
+      .nav-group { display: contents; }
+      .nav-label { display: none; }
+      .sidebar a { flex: 0 0 auto; white-space: nowrap; font-size: .85rem; }
+      main { margin-left: 0; padding: 2rem 1rem 8rem; }
+      .sources dl > div { grid-template-columns: 1fr; gap: .35rem; }
+      .theme-switch { left: .75rem; right: .75rem; flex-wrap: nowrap; overflow-x: auto; white-space: nowrap; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    /* ---- Shipwright's Blueprint: drafting grid, white linework, title blocks on every drawing ---- */
+    :root {
+      color-scheme: dark;
+      --bg: #0d3460;
+      --bg-deep: #0a2a4f;
+      --ink: #f1f7ff;
+      --muted: #a9c3e0;
+      --line: rgba(220,236,255,.55);
+      --line-faint: rgba(220,236,255,.16);
+      --accent: #ffcf5c;      /* drafting highlighter */
+      --red: #ff8a7a;         /* correction pencil */
+      --font-body: "IBM Plex Sans", system-ui, sans-serif;
+      --font-head: "Archivo", "Arial Narrow", sans-serif;
+      --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    }
+    body {
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--line-faint) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line-faint) 1px, transparent 1px),
+        linear-gradient(rgba(220,236,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(220,236,255,.06) 1px, transparent 1px);
+      background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+      background-attachment: fixed;
+    }
+    a { color: var(--accent); }
+
+    .topbar { background: var(--bg-deep); border-bottom: 1.5px solid var(--line); }
+    .brand-mark { border: 1.5px solid var(--ink); color: var(--ink); font: 700 14px/1 var(--font-mono); position: relative; }
+    .brand-mark::after { content: ""; position: absolute; inset: 4px; border: 1px dashed var(--line); }
+    .brand-text strong { font: 800 1.02rem var(--font-head); letter-spacing: .06em; text-transform: uppercase; font-stretch: 112%; }
+    .brand-text small { color: var(--muted); font: .72rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .top-links a { color: var(--muted); font: .82rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+    .top-links a:hover, .top-links a[aria-current] { color: var(--ink); box-shadow: inset 0 -2px var(--accent); }
+
+    .sidebar { background: rgba(10,42,79,.82); border-right: 1.5px solid var(--line); }
+    .nav-label { color: var(--muted); font: 500 .7rem var(--font-mono); letter-spacing: .16em; text-transform: uppercase; }
+    .nav-label::before { content: "— "; color: var(--accent); }
+    .sidebar a { color: #d6e5f6; font-size: .92rem; border-left: 1.5px solid transparent; }
+    .sidebar a:hover { color: #fff; border-left-color: var(--line); background: rgba(255,255,255,.04); }
+    .sidebar a.active { color: #fff; font-weight: 600; border-left-color: var(--accent); background: rgba(255,207,92,.08); }
+
+    .eyebrow { margin: 0; color: var(--accent); font: 500 .78rem var(--font-mono); letter-spacing: .16em; text-transform: uppercase; }
+    .page-hero { position: relative; padding: 2rem 0 2rem 1.5rem; border-left: 1.5px solid var(--line); }
+    .page-hero::before { content: "A"; position: absolute; left: -15px; top: -14px; display: grid; place-items: center; width: 28px; height: 28px; border: 1.5px solid var(--line); border-radius: 50%; background: var(--bg); color: var(--ink); font: 600 .75rem var(--font-mono); }
+    h1 { font: 800 clamp(2.6rem, 6vw, 4.4rem)/1 var(--font-head); font-stretch: 115%; letter-spacing: -.01em; text-transform: uppercase; }
+    h2 { display: flex; align-items: center; gap: .8rem; font: 700 clamp(1.3rem, 2.6vw, 1.7rem)/1.2 var(--font-head); font-stretch: 112%; text-transform: uppercase; letter-spacing: .03em; }
+    h2::after { content: ""; flex: 1; height: 0; border-top: 1px dashed var(--line); }
+    .lede { color: #dbe8f7; font-size: 1.15rem; }
+    .meta li { font: .8rem var(--font-mono); }
+    .meta span { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .meta span::after { content: ":"; }
+    .badge { padding: .05rem .5rem; border: 1.5px solid var(--accent); color: var(--accent); font: 600 .72rem var(--font-mono); letter-spacing: .1em; text-transform: uppercase; }
+    code { padding: .05em .35em; border: 1px solid var(--line-faint); color: #fff; background: rgba(0,0,0,.18); font: .86em var(--font-mono); }
+
+    /* Drawings: dimension rule above, title block below */
+    .page { counter-reset: dwg; }
+    .diagram { counter-increment: dwg; position: relative; border: 1.5px solid var(--line); background: var(--bg-deep); }
+    .diagram::before { content: "◂ 1120 ▸"; position: absolute; left: 0; right: 0; top: -1.5rem; text-align: center; color: var(--muted); font: .68rem var(--font-mono); letter-spacing: .1em;
+      background: linear-gradient(var(--line), var(--line)) left 50% / 40% 1px no-repeat, linear-gradient(var(--line), var(--line)) right 50% / 40% 1px no-repeat; }
+    .diagram-head { display: grid; grid-template-columns: auto 1fr auto; align-items: stretch; gap: 0; border-top: 1.5px solid var(--line); order: 2; }
+    .diagram { display: flex; flex-direction: column; }
+    .diagram-frame { order: 1; padding: 10px; }
+    .diagram-note { order: 3; margin: 0; padding: .7rem 1rem; border-top: 1px solid var(--line-faint); color: var(--muted); font-size: .9rem; }
+    .diagram-head > * { padding: .55rem 1rem; }
+    .fig-num { border-right: 1.5px solid var(--line); color: var(--accent); font: 600 .75rem var(--font-mono); letter-spacing: .1em; font-size: 0; }
+    .fig-num::before { content: "DWG " counter(dwg, decimal-leading-zero); font-size: .75rem; }
+    .fig-title { font: 700 .95rem var(--font-head); text-transform: uppercase; letter-spacing: .05em; font-stretch: 110%; }
+    .fig-open { border-left: 1.5px solid var(--line); font: .75rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+
+    .table-wrap { border: 1.5px solid var(--line); background: rgba(10,42,79,.75); }
+    th { color: var(--accent); font: 500 .72rem var(--font-mono); letter-spacing: .14em; text-transform: uppercase; border-bottom: 1.5px solid var(--line); }
+    td { border-bottom: 1px dashed var(--line-faint); font-size: .94rem; color: #dbe8f7; }
+    td + td, th + th { border-left: 1px solid var(--line-faint); }
+    td:first-child { color: #fff; font: 700 .9rem var(--font-head); text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+
+    .callout { position: relative; padding: 1.2rem 1.4rem; border: 1.5px dashed var(--red); background: rgba(255,138,122,.07); }
+    .callout-label { display: inline-block; margin-bottom: .45rem; color: var(--red); font: 600 .75rem var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+    .callout-label::before { content: "⚠ NOTE // "; }
+    .callout p { color: #fbe9e6; }
+
+    .steps li::before { border: 1.5px solid var(--ink); border-radius: 50%; font: 600 .82rem var(--font-mono); background: var(--bg); }
+    .steps li:not(:last-child)::after { content: ""; position: absolute; left: 1.05rem; top: 2.2rem; bottom: -.75rem; border-left: 1px dashed var(--line); }
+    .steps li strong { color: #fff; }
+    .steps li span { color: var(--muted); }
+
+    .code-block { border: 1.5px solid var(--line); background: #071d38; }
+    .code-block figcaption { padding: .5rem 1rem; border-bottom: 1px solid var(--line-faint); color: var(--muted); font: .75rem var(--font-mono); letter-spacing: .05em; }
+    .code-lang { color: var(--accent); }
+    .code-block pre { padding: 1rem 1.2rem; color: #e6efff; font: .88rem/1.65 var(--font-mono); }
+    .code-block code { padding: 0; border: 0; background: none; color: inherit; font: inherit; }
+    .k { color: #8fd8ff; } .s { color: var(--accent); } .c { color: #7d9cc0; font-style: italic; }
+
+    .sources dl { border-top: 1.5px solid var(--line); }
+    .sources dl > div { border-bottom: 1px dashed var(--line-faint); }
+    .sources dt { font: 700 .88rem var(--font-head); text-transform: uppercase; letter-spacing: .05em; }
+
+    .card { position: relative; border: 1.5px solid var(--line); background: rgba(10,42,79,.8); transition: background .15s, border-color .15s; }
+    .card::before, .card::after { content: "+"; position: absolute; color: var(--accent); font: 400 1rem/1 var(--font-mono); }
+    .card::before { top: -.55rem; left: -.38rem; }
+    .card::after { bottom: -.55rem; right: -.38rem; }
+    .card:hover { border-color: var(--accent); background: rgba(255,207,92,.06); }
+    .card-kicker { color: var(--accent); font: .7rem var(--font-mono); letter-spacing: .14em; text-transform: uppercase; }
+    .card strong { font: 800 1.15rem var(--font-head); text-transform: uppercase; font-stretch: 112%; }
+    .card p { color: var(--muted); font-size: .92rem; }
+    .card-go { color: var(--ink); font: .78rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+    .card-go::after { content: " →"; color: var(--accent); }
+
+    .pager a { border: 1.5px solid var(--line); color: #fff; font: 700 1rem var(--font-head); text-transform: uppercase; letter-spacing: .04em; }
+    .pager a:hover { border-color: var(--accent); }
+    .pager small { color: var(--accent); font: .7rem var(--font-mono); letter-spacing: .14em; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to documentation</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="RPG2002-Ship Architecture Atlas home">
+      <span class="brand-mark" aria-hidden="true">R2</span>
+      <span class="brand-text"><strong>RPG2002-Ship</strong><small>Architecture Atlas</small></span>
+    </a>
+    <nav class="top-links" aria-label="Site">
+      <a href="#top" aria-current="page">Atlas</a>
+      <a href="#sources">Source index</a>
+      <a href="https://github.com/squareparticle/RPG2002-Ship">GitHub</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Documentation">
+      <nav>
+        <div class="nav-group">
+          <p class="nav-label">Start here</p>
+          <a href="#top">Overview</a>
+          <a href="#top" class="active" aria-current="page">System topology</a>
+          <a href="#top">C++ · Lua · YAML</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-label">Flows</p>
+          <a href="#top">Runtime lifecycle</a>
+          <a href="#top">Playable slice map</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-label">Systems</p>
+          <a href="#top">World &amp; rendering</a>
+          <a href="#top">State &amp; save/load</a>
+          <a href="#top">Battle flow</a>
+          <a href="#top">Asset dependency map</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-label">History</p>
+          <a href="#top">Legacy correspondence</a>
+        </div>
+        <div class="nav-group">
+          <p class="nav-label">Reference</p>
+          <a href="#top">Source index &amp; glossary</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main id="content" tabindex="-1">
+      <div class="page" id="top">
+        <header class="page-hero">
+          <p class="eyebrow">Foundation · Ownership</p>
+          <h1>System topology</h1>
+          <p class="lede">Four ownership layers keep the ship slice readable: the executable drives the game, the game owns RPG behavior, a deliberately small framework holds proven structure, and the platform wraps Windows.</p>
+          <ul class="meta">
+            <li><span>Primary source</span><code>src/</code></li>
+            <li><span>Decision owner</span>Jamie</li>
+            <li><span>Status</span><b class="badge">Implemented</b></li>
+          </ul>
+        </header>
+
+        <figure class="diagram">
+          <figcaption class="diagram-head">
+            <span class="fig-num">Fig. 01</span>
+            <span class="fig-title">Ownership and dependency direction</span>
+            <a class="fig-open" href="assets/diagrams/system-topology.svg">Open SVG <span aria-hidden="true">↗</span></a>
+          </figcaption>
+          <div class="diagram-frame"><img src="assets/diagrams/system-topology.svg" alt="System topology: Application, Game, Framework and Platform ownership layers, with YAML and Lua entering through game-owned boundaries." width="1120" height="620"></div>
+          <p class="diagram-note">Read from the executable boundary down toward operating-system services. YAML and Lua enter only through game-owned doors.</p>
+        </figure>
+
+        <section class="prose">
+          <h2>Why four layers exist</h2>
+          <p>The split makes ownership visible. It is intentionally narrower than a general engine: abstractions enter <code>Framework</code> only after the ship slice demonstrates real reuse. Everything that knows about missions, keys, lanterns, or battles stays in <code>Game</code>.</p>
+        </section>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Layer</th><th>Owns</th><th>Does not own</th></tr></thead>
+            <tbody>
+              <tr><td>Application</td><td>Win32 startup, configuration, frame timing, native event translation.</td><td>RPG rules or scene content.</td></tr>
+              <tr><td>Game</td><td>Scenes, objects, scripting, RPG state, battles, menus, effects.</td><td>Raw Direct2D, XAudio2, or Win32 calls.</td></tr>
+              <tr><td>Framework</td><td>The small proven scene, layer, object, camera, and sprite structure.</td><td>Missions, inventory, battles, or other RPG policy.</td></tr>
+              <tr><td>Platform</td><td>Graphics, text, audio, input, logging, loaded asset definitions.</td><td>Gameplay intent or content decisions.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <aside class="callout">
+          <span class="callout-label">Boundary test</span>
+          <p>If a type mentions a mission, item, battle reward, NPC duty, or semantic ground behavior, it belongs to Game unless Jamie explicitly decides otherwise.</p>
+        </aside>
+
+        <section class="prose">
+          <h2>A concrete interaction</h2>
+          <ol class="steps">
+            <li><strong>YAML places the door.</strong><span>The scene map defines its sprite, position, and local <code>interaction</code> trigger.</span></li>
+            <li><strong>C++ notices the player.</strong><span>The interaction point picks the nearest eligible object on the primary-action edge.</span></li>
+            <li><strong>Lua decides what it means.</strong><span>A rule table selects the script; it calls narrow functions like <code>Say</code> or <code>SetTag</code>.</span></li>
+            <li><strong>C++ applies it safely.</strong><span>Requests are validated, queued, and drained after traversal.</span></li>
+          </ol>
+        </section>
+
+        <figure class="code-block">
+          <figcaption><span class="code-file">assets/scenes/boatscene/map.yaml</span><span class="code-lang">YAML</span></figcaption>
+<pre><code><span class="k">groundRegions</span>:
+  <span class="k">storageDoor</span>:
+    <span class="k">color</span>: <span class="s">"FF0000"</span>
+    <span class="k">behavior</span>: collision        <span class="c"># Lua can swap this to warp</span>
+    <span class="k">parameters</span>:
+      <span class="k">destination</span>: storageRoom
+      <span class="k">playerSpawnPoint</span>: mainDoor</code></pre>
+        </figure>
+
+        <figure class="diagram">
+          <figcaption class="diagram-head">
+            <span class="fig-num">Fig. 02</span>
+            <span class="fig-title">The playable ship slice</span>
+            <a class="fig-open" href="assets/diagrams/game-map.svg">Open SVG <span aria-hidden="true">↗</span></a>
+          </figcaption>
+          <div class="diagram-frame"><img src="assets/diagrams/game-map.svg" alt="Playable ship vertical slice: boat to storage room to battle arena and back, with persistent facts driving scene reconstruction." width="1120" height="600"></div>
+          <p class="diagram-note">Boat → storage room → one-shot battle → exact return. Persistent facts rebuild each scene on load.</p>
+        </figure>
+
+        <section class="sources" id="sources">
+          <h2>Where this lives</h2>
+          <dl>
+            <div><dt>Application boundary</dt><dd><code>src/Application/Application.cpp</code> <code>src/Application/AppConfig.cpp</code></dd></div>
+            <div><dt>Game coordinator</dt><dd><code>src/Game/GameController.cpp</code></dd></div>
+            <div><dt>Framework seams</dt><dd><code>src/Framework/Scenes/BaseScene.cpp</code> <code>src/Framework/Objects/BaseGameObject.cpp</code></dd></div>
+            <div><dt>Platform edge</dt><dd><code>src/Platform/Graphics.cpp</code> <code>src/Platform/Audio/Audio.cpp</code></dd></div>
+          </dl>
+        </section>
+
+        <section class="next">
+          <h2>Keep exploring</h2>
+          <div class="cards">
+            <a class="card" href="#top"><span class="card-kicker">Foundation</span><strong>C++ · Lua · YAML</strong><p>Mechanics, meaning, and authored configuration.</p><span class="card-go">Inspect the boundary</span></a>
+            <a class="card" href="#top"><span class="card-kicker">Flow</span><strong>Runtime lifecycle</strong><p>From config and loading to update, render, and shutdown.</p><span class="card-go">Follow the lifecycle</span></a>
+            <a class="card" href="#top"><span class="card-kicker">System</span><strong>Battle flow</strong><p>The one-shot arena, turn order, rewards, and exact return.</p><span class="card-go">Enter the arena</span></a>
+          </div>
+        </section>
+
+        <nav class="pager" aria-label="Previous and next page">
+          <a href="#top" class="prev"><small>Previous</small>Overview</a>
+          <a href="#top" class="next-link"><small>Next</small>C++ · Lua · YAML</a>
+        </nav>
+      </div>
+    </main>
+  </div>
+
+  <nav class="theme-switch" aria-label="Compare style tests">
+    <span>Style tests</span>
+    <a href="style-test-logbook.html">Captain's Logbook</a>
+    <a href="style-test-menu.html">Party Menu</a>
+    <a href="style-test-blueprint.html" aria-current="page">Shipwright's Blueprint</a>
+    <a href="style-test-lantern.html">Night Voyage</a>
+    <a href="style-test-sticker.html">Sticker Book</a>
+    <a href="style-test.html">Bubbly (original test)</a>
+  </nav>
+</body>
+</html>

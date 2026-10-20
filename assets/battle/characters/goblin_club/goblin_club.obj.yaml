@@ -1,0 +1,13 @@
+init:
+  type: enemy
+  sprite: goblinClub
+  animation: idle
+  x: 0
+  y: 0
+  scale: 1
+  active: false
+  level: 1
+  moves: [clubStrike]
+  battleScript: assets/battle/characters/goblin_club/goblin_club.battle.lua
+  rewards: { experience: 15, items: [crudeClub] }
+  stats: { name: Goblin B, maxHp: 36, maxMp: 0, attack: 9, defense: 3 }

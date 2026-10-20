@@ -1,0 +1,5 @@
+Say("You take the Guiding Lantern. Its warm light holds steady despite the storm outside.", nil, "lanternPickup")
+AddInventoryItem("guiding_lantern")
+SetTag("storageLantern_has_lantern", true)
+SetTag("storageLantern_flames_active", true)
+DestroyObject(CurrentObjectId)

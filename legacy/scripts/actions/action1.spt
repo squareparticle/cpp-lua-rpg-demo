@@ -1,0 +1,4 @@
+HeroDirection=EAST
+Delay=10
+Message="hello_World"
+endscript

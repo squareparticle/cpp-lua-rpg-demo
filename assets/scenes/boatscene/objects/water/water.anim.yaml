@@ -1,0 +1,10 @@
+image: assets/scenes/boatscene/objects/water/water.png
+
+sheet:
+  rows: 1
+  columns: 1
+
+animations:
+  idle:
+    fps: 1
+    cells: [0]

@@ -1,0 +1,111 @@
+scene:
+  id: boatScene
+  initScript: assets/scenes/boatscene/init.lua
+  music: shipMusic
+
+camera:
+  target: playerObj
+  window: { x: 0, y: 0, width: 1254, height: 1254 }
+
+playerSpawnPoints:
+  storageDoor: { x: 488, y: 430 }
+
+# Movement points are sprite origins, matching layer object x/y. Camera points
+# are world centers. Route: left deck aisle, below barrels, stairs, stern chest.
+waypoints:
+  crew1StairsTop: { x: 705, y: 145 }
+  crew1Watch: { x: 720, y: 400 }
+  mageAisle: { x: 510, y: 405 }
+  mageAcrossDeck: { x: 565, y: 345 }
+  mageStairsBase: { x: 705, y: 345 }
+  mageStairsTop: { x: 705, y: 120 }
+  mageChestAisle: { x: 470, y: 120 }
+  mageChest: { x: 470, y: 45 }
+  fire1Focus: { x: 591.72, y: 73.44 }
+  fire2Focus: { x: 796.72, y: 353.44 }
+  fire3Focus: { x: 521.72, y: 668.44 }
+  fire4Focus: { x: 766.72, y: 733.44 }
+
+groundRegions:
+  lanternRelease:
+    color: "00FF00"
+    behavior: walkable
+  storageDoor:
+    color: "FF0000"
+    behavior: collision
+    parameters:
+      destination: storageRoom
+      playerSpawnPoint: mainDoor
+
+resources:
+  images:
+    - { id: background, path: assets/scenes/boatscene/background.png }
+    - { id: foreground, path: assets/scenes/boatscene/foreground.png }
+  collisionMasks:
+    - { id: walkableArea, path: assets/scenes/boatscene/mask.png }
+  sounds:
+    - { id: keyPickup, path: assets/sounds/menuselect.wav }
+    - { id: storageDoorOpen, path: assets/sounds/unlocked.wav }
+    - { id: storageDoorLocked, path: assets/sounds/locked.wav }
+    - { id: lanternRelease, path: assets/sounds/releaselantern.wav }
+    - { id: boatFire, path: assets/sounds/fire.wav }
+    - { id: chestUnlock, path: assets/sounds/unlocked.wav }
+    - { id: rainMagic, path: assets/sounds/victory2.wav }
+  sprites:
+    - { id: crew, path: assets/world/characters/crew/crew.anim.yaml }
+    - { id: helm, path: assets/scenes/boatscene/objects/wheel.anim.yaml }
+    - { id: storageDoor, path: assets/scenes/boatscene/objects/door/door.anim.yaml }
+    - { id: flame, path: assets/fx/flame.anim.yaml }
+    - { id: interactionPrompt, path: assets/fx/interaction_prompt.anim.yaml }
+    - { id: storageDoorKey, path: assets/scenes/boatscene/objects/key/key.anim.yaml }
+    - { id: player, path: assets/world/characters/player/player.anim.yaml }
+    - { id: lava, path: assets/scenes/boatscene/objects/water/lava.anim.yaml }
+    - { id: water, path: assets/scenes/boatscene/objects/water/water.anim.yaml }
+    - { id: waterFlipped, path: assets/scenes/boatscene/objects/water/water-flipped.anim.yaml }
+  objects:
+    - { id: crew1, path: assets/world/characters/crew/crew1.obj.yaml }
+    - { id: crew2, path: assets/world/characters/crew/crew2.obj.yaml }
+    - { id: crew3, path: assets/world/characters/crew/crew3.obj.yaml }
+    - { id: helmObj, path: assets/scenes/boatscene/objects/wheel.obj.yaml }
+    - { id: playerObj, path: assets/world/characters/player/player.obj.yaml }
+    - { id: storageDoorObj, path: assets/scenes/boatscene/objects/door/storage_door.obj.yaml }
+    - { id: waterObj, path: assets/scenes/boatscene/objects/water/water.obj.yaml }
+
+layers:
+  water:
+    type: Object
+    objects:
+      - { obj: waterObj, sprite: water, speedY: -20 }
+
+  lavaOverlay:
+    type: Object
+    objects: []
+
+  shipFloor:
+    type: Image
+    items:
+      - { image: background, x: 0, y: 0 }
+
+  effects:
+    type: Object
+    objects: []
+
+  doors:
+    type: Object
+    objects:
+      - { obj: storageDoorObj, x: 501, y: 308 }
+
+  actors:
+    type: Object
+    sort: y
+    objects:
+      - { obj: helmObj, x: 585, y: 143 }
+      - { obj: playerObj, x: 600, y: 400 }
+      - { obj: crew1, x: 720, y: 400 }
+      - { obj: crew2, x: 585, y: 30 }
+      - { obj: crew3, x: 520, y: 800 }
+
+  shipForeground:
+    type: Image
+    items:
+      - { image: foreground, x: 0, y: 0 }

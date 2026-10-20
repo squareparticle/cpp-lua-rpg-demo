@@ -1,0 +1,1 @@
+StartBattle({ "goblinSword", "goblinClub" })

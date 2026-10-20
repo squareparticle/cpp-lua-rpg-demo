@@ -1,0 +1,14 @@
+init:
+  type: player
+  sprite: player
+  animation: idleDown
+  x: 0
+  y: 0
+  speed: 200
+  scale: 0.45
+  sortPointY: 300
+  cameraPoint: { x: 119, y: 165 }
+  interactionPoint: { x: 119, y: 300 }
+  collisionProbes:
+    - { x: 90, y: 300 }
+    - { x: 148, y: 300 }

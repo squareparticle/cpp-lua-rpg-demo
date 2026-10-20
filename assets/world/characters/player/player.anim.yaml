@@ -1,0 +1,31 @@
+image: assets/world/characters/player/player.png
+
+sheet:
+  rows: 4
+  columns: 5
+
+animations:
+  walkLeft:
+    fps: 8
+    cells: [0, 1, 2, 3, 4]
+  idleLeft:
+    fps: 1
+    cells: [2]
+  walkRight:
+    fps: 8
+    cells: [5, 6, 7, 8, 9]
+  idleRight:
+    fps: 1
+    cells: [7]
+  walkDown:
+    fps: 8
+    cells: [10, 11, 12, 13, 14]
+  idleDown:
+    fps: 1
+    cells: [12]
+  walkUp:
+    fps: 8
+    cells: [15, 16, 17, 18, 19]
+  idleUp:
+    fps: 1
+    cells: [17]

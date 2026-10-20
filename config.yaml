@@ -1,0 +1,25 @@
+game:
+  # Supported start modes:
+  # scene       - always load startScene (useful for testing a specific scene)
+  # saveOrScene - load saves/save.yaml when present, otherwise load startScene
+  startMode: saveOrScene
+  # Supported current scenes: boatScene, storageRoom, battleArena
+  startScene: boatScene
+
+window:
+  # Supported modes: windowed, fullscreen, borderless
+  mode: fullscreen
+  width: 1280
+  height: 720
+
+render:
+  width: 1280
+  height: 720
+  # Supported scaling modes: fit, stretch
+  scaling: fit
+  # Supported filtering modes: nearest, linear
+  filtering: nearest
+
+dialog:
+  # Typewriter reveal speed in characters per second.
+  typewriterCharactersPerSecond: 84

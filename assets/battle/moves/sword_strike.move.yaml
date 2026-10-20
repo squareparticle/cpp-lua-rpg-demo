@@ -1,0 +1,12 @@
+effect: damage
+target: opponent
+power: 1.0
+mpCost: 0
+
+animations:
+  actor: attack
+  target: hitPhysical
+  impactFrame: 3
+
+sounds:
+  impact: swordStrikeImpact

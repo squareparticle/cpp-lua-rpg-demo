@@ -1,0 +1,6 @@
+Say("Captain, we're entering Hell's Gate. The storage lantern has gone dark, and we will need it before the ship reaches the narrowest part of the channel.")
+Say("The storage-room door is locked. Its key should still be somewhere on this deck, unless the storm has already carried it overboard.")
+Say("Please find the key and open the storage room. I will remain here and keep watch on the channel.")
+SetTag("mission_storageLantern", true)
+SpawnObject("assets/scenes/boatscene/objects/key/storage_door_key.obj.yaml")
+DebugMessage((CurrentObjectId or CurrentSceneId) .. ": storage-lantern mission started")

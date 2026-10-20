@@ -1,0 +1,30 @@
+player:
+  name: Cecil
+  level: 1
+  experience: 0
+  maxHp: 142
+  maxMp: 36
+  attack: 12
+  defense: 5
+  gold: 0
+  # Each key is the current level; its value is XP needed to reach the next.
+  experienceToNextLevel:
+    1: 100
+    2: 150
+    3: 225
+
+resources:
+  sounds:
+    - { id: dialogPage, path: assets/sounds/pop.wav }
+    - { id: menuOpen, path: assets/sounds/pop.wav }
+    - { id: uiExit, path: assets/sounds/exit.wav }
+    - { id: menuMove, path: assets/sounds/menumove.wav }
+    - { id: menuSelect, path: assets/sounds/menuselect.wav }
+    # Swap the numbered path to audition the alternate version.
+    - { id: shipMusic, path: assets/music/ship_music2.wav }
+    - { id: battleMusic, path: assets/music/battle_music1.wav }
+  items:
+    - { id: storage_door_key, path: assets/items/storage_door_key.item.yaml }
+    - { id: guiding_lantern, path: assets/items/guiding_lantern.item.yaml }
+    - { id: rustyDagger, path: assets/items/rusty_dagger.item.yaml }
+    - { id: crudeClub, path: assets/items/crude_club.item.yaml }

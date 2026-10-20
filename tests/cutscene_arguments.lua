@@ -1,0 +1,23 @@
+local function rejected(fn, ...)
+    assert(not pcall(fn, ...), "Invalid cutscene arguments were accepted")
+end
+
+rejected(MoveObjectTo, "crew3", "", 150)
+rejected(MoveObjectTo, "crew3", "stairs", -1)
+rejected(MoveCameraTo, "stairs", 0)
+rejected(MoveCameraTo, "stairs", math.huge)
+rejected(Wait, 0/0)
+rejected(Wait, 1e100)
+rejected(Wait, 1e-100)
+rejected(FadeOutScene, 0)
+rejected(PlayAnimation, "crew3", "")
+rejected(SetObjectPosition, "crew1", "")
+rejected(FollowObject, "crew3", math.huge)
+rejected(ChangeScene, "")
+rejected(StartCutscene, "")
+-- Positive blocking calls also require a coroutine, not a synchronous hook.
+rejected(MoveObjectTo, "crew3", "stairs", 150)
+rejected(MoveCameraTo, "stairs", 1)
+rejected(Wait, 1)
+rejected(FadeOutScene, 1)
+SetTag("test_cutscene_arguments_checked", true)

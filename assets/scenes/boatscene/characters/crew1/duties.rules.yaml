@@ -1,0 +1,2 @@
+rules:
+  - script: assets/scenes/boatscene/characters/crew1/duties.lua

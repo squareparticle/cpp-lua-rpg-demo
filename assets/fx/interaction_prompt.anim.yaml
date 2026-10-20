@@ -1,0 +1,10 @@
+image: assets/fx/Pixel Art E Key Prompt.png
+
+sheet:
+  rows: 1
+  columns: 1
+
+animations:
+  idle:
+    fps: 1
+    cells: [0]

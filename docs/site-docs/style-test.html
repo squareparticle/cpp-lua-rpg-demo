@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A local visual experiment for the RPG2002-Ship Architecture Atlas.">
+  <title>Atlas style test · RPG2002-Ship</title>
+  <link rel="stylesheet" href="style-test.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="brand-mark">R2</span><span><strong>RPG2002-Ship</strong><small>Architecture Atlas · style test</small></span></a>
+    <span class="test-tag">LOCAL DESIGN EXPERIMENT</span>
+  </header>
+  <aside class="sidebar">
+    <p class="nav-label">Try a page</p>
+    <a class="active" href="#topology">System topology</a>
+    <a href="#game-map">Playable slice map</a>
+    <a href="#state">Persistent state</a>
+    <a href="#save-load">Save and load</a>
+    <div class="sidebar-note"><span>Style direction</span><p>Friendly shape. Strong hierarchy. A little color. Keep the diagrams easy to read.</p></div>
+  </aside>
+  <main id="top">
+    <section class="intro">
+      <p class="eyebrow"><span class="sparkle">✳</span> THE SAME ATLAS, A DIFFERENT MOOD</p>
+      <h1>A little more <em>play</em> in the architecture.</h1>
+      <p class="lede">A visual test for a warmer, bubblier documentation style. Same fixed sidebar and article flow; the real Atlas diagrams are here to check contrast and scale.</p>
+      <div class="chips"><span>rounder shapes</span><span>bolder type</span><span>bright lilac + peach</span></div>
+    </section>
+    <section class="sample" id="topology">
+      <div class="section-heading"><span class="number">01</span><div><p class="eyebrow">SYSTEMS · OWNERSHIP</p><h2>The whole project, at a glance</h2></div></div>
+      <p class="body-copy">The rounded frames add warmth around the diagram. The drawing itself remains crisp and spacious, so technical labels still have room to breathe.</p>
+      <figure class="diagram-card"><img src="assets/diagrams/system-topology.svg" alt="System topology: Application, Game, Framework and Platform ownership, alongside Lua and YAML boundaries."><figcaption><span class="caption-dot"></span> Four layers, clear handoffs, one small ship slice.</figcaption></figure>
+    </section>
+    <section class="sample" id="game-map">
+      <div class="section-heading"><span class="number peach">02</span><div><p class="eyebrow">GAMEPLAY · ROUTE</p><h2>See the playable slice</h2></div></div>
+      <aside class="note-card"><span class="note-icon">✦</span><p><strong>Same content.</strong> The colorful callout gives explanatory notes a distinct voice without squeezing them into the diagram.</p></aside>
+      <figure class="diagram-card"><img src="assets/diagrams/game-map.svg" alt="Playable ship vertical slice game map from boat to locked door, storage, battle, and return."><figcaption><span class="caption-dot peach-dot"></span> A route through the current game, including the battle round trip.</figcaption></figure>
+    </section>
+    <section class="sample" id="state">
+      <div class="section-heading"><span class="number green">03</span><div><p class="eyebrow">RUNTIME · STATE</p><h2>Who owns what stays clear</h2></div></div>
+      <figure class="diagram-card"><img src="assets/diagrams/state-ownership.svg" alt="Persistent state ownership and data flow through GameController, Lua, C++, and YAML."><figcaption><span class="caption-dot green-dot"></span> Controller-owned facts and the boundaries around them.</figcaption></figure>
+    </section>
+    <section class="sample" id="save-load">
+      <div class="section-heading"><span class="number">04</span><div><p class="eyebrow">RUNTIME · SAVE/LOAD</p><h2>Long diagrams still fit</h2></div></div>
+      <figure class="diagram-card"><img src="assets/diagrams/save-load-flow.svg" alt="Guarded save/load validation and scene reconstruction flow."><figcaption><span class="caption-dot"></span> Guarded validation gates, with enough height to read each step.</figcaption></figure>
+    </section>
+    <footer>Style-only experiment · The main Atlas CSS and pages are unchanged.</footer>
+  </main>
+</body>
+</html>
