@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 650" role="img" aria-labelledby="title desc">
+  <title id="title">RPG2002-Ship render stack</title>
+  <desc id="desc">A bottom-to-top stack shows boat YAML layers, WorldScene overlay passes, GameController user interface, the fixed game surface, and final window presentation.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <style>
+      .bg{fill:#091522}.layer{fill:#102436;stroke:#35536a;stroke-width:2}.sorted{fill:#12313a;stroke:#66d9df;stroke-width:2}.world{fill:#172b3e;stroke:#35536a;stroke-width:2}.gui{fill:#2a2619;stroke:#8a713c;stroke-width:2}.surface{fill:#1c2734;stroke:#66d9df;stroke-width:2}.label{fill:#f4f7f9;font:700 16px system-ui,sans-serif}.copy{fill:#9fb0bf;font:13px system-ui,sans-serif}.tag{fill:#66d9df;font:700 11px ui-monospace,monospace;letter-spacing:1.2px}.line{fill:none;stroke:#66d9df;stroke-width:2;marker-end:url(#arrow)}.brace{fill:none;stroke:#51677a;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="650" rx="18"/>
+  <text class="tag" x="54" y="46">BOTTOM → TOP</text>
+  <g transform="translate(88 84)">
+    <rect class="layer" x="0" y="0" width="380" height="48" rx="9"/><text class="label" x="18" y="30">water · lavaOverlay</text>
+    <rect class="layer" x="0" y="58" width="380" height="48" rx="9"/><text class="label" x="18" y="88">shipFloor</text>
+    <rect class="layer" x="0" y="116" width="380" height="48" rx="9"/><text class="label" x="18" y="146">effects · doors</text>
+    <rect class="sorted" x="0" y="174" width="380" height="58" rx="9"/><text class="label" x="18" y="199">actors</text><text class="tag" x="270" y="198">STABLE Y SORT</text><text class="copy" x="18" y="220">player · crew · runtime objects</text>
+    <rect class="layer" x="0" y="242" width="380" height="48" rx="9"/><text class="label" x="18" y="272">shipForeground</text>
+    <path class="brace" d="M-18 0h-12v290h12"/>
+    <text class="tag" x="-54" y="150" transform="rotate(-90 -54 150)" text-anchor="middle">MAP YAML · WORLD SPACE</text>
+  </g>
+  <path class="line" d="M278 388v32"/>
+  <g transform="translate(88 420)">
+    <rect class="world" width="380" height="58" rx="9"/><text class="label" x="18" y="26">Weather</text><text class="copy" x="18" y="46">screen-space world effect</text>
+    <rect class="world" y="68" width="380" height="58" rx="9"/><text class="label" x="18" y="94">Interaction prompts</text><text class="copy" x="18" y="114">world anchors · final scene overlay</text>
+  </g>
+  <path class="line" d="M468 512h78"/>
+  <g transform="translate(546 420)">
+    <rect class="gui" width="230" height="146" rx="12"/><text class="tag" x="20" y="28">GAMECONTROLLER GUI</text><text class="label" x="20" y="62">Dialogue</text><text class="label" x="20" y="92">Main menu</text><text class="label" x="20" y="122">Cutscene fade</text><text class="copy" x="20" y="138">fixed screen-space · fade on top</text>
+  </g>
+  <path class="line" d="M776 483h62"/>
+  <g transform="translate(838 378)">
+    <rect class="surface" width="224" height="106" rx="12"/><text class="tag" x="18" y="28">GAME SURFACE</text><text class="label" x="18" y="62">1280 × 720</text><text class="copy" x="18" y="85">one composed bitmap</text>
+    <path class="line" d="M112 106v38"/>
+    <rect class="layer" y="144" width="224" height="82" rx="12"/><text class="tag" x="18" y="172">APPLICATION</text><text class="label" x="18" y="202">Window presentation</text><text class="copy" x="18" y="220">fit / stretch · filtering</text>
+  </g>
+</svg>

@@ -10,9 +10,3 @@ CMakeUserPresets.json
 *.suo
 *.VC.db
 *.VC.VC.opendb
-*.png
-!/docs/assets/**/*.png
-/assets/sounds
-/assets/music
-/docs/site-docs/assets
-/docs/site-docs/assets/diagrams

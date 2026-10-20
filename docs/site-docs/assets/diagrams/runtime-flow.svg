@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 600" role="img" aria-labelledby="title desc">
+  <title id="title">Startup and the frame loop</title>
+  <desc id="desc">Startup reads config.yaml and game.yaml, then either loads the save or starts the configured scene, builds it, and runs object INIT hooks and the scene init script. Each frame, GameController checks the pause menu first, then updates the scene (with player input blocked while dialogue is open), applies queued Lua changes, handles a scene change or battle request by building the next scene, and finally renders the world, weather, prompts, dialogue and menus.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <marker id="g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#e9bc67"/></marker>
+    <style>
+      .bg{fill:#091522}.box{fill:#102436;stroke:#35536a;stroke-width:2}.hot{fill:#12313a;stroke:#66d9df;stroke-width:2}
+      .gate{fill:#2a2619;stroke:#8a713c;stroke-width:2}
+      .h{fill:#66d9df;font:700 12px ui-monospace,monospace;letter-spacing:1.4px}
+      .n{fill:#f4f7f9;font:700 17px system-ui,sans-serif}.s{fill:#a9b9c7;font:13px system-ui,sans-serif}
+      .line{fill:none;stroke:#66d9df;stroke-width:2;marker-end:url(#a)}
+      .back{fill:none;stroke:#e9bc67;stroke-width:2;stroke-dasharray:7 6;marker-end:url(#g)}
+      .lbl{fill:#e9bc67;font:600 12.5px system-ui,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="600" rx="18"/>
+
+  <text class="h" x="40" y="44">STARTUP · ONCE</text>
+  <g transform="translate(40 60)"><rect class="box" width="180" height="88" rx="12"/><text class="n" x="18" y="34">config.yaml</text><text class="s" x="18" y="58">window · render size</text><text class="s" x="18" y="76">start mode · scene</text></g>
+  <path class="line" d="M220 104h24"/>
+  <g transform="translate(248 60)"><rect class="box" width="190" height="88" rx="12"/><text class="n" x="18" y="34">game.yaml</text><text class="s" x="18" y="58">player stats · XP table</text><text class="s" x="18" y="76">items · menu sounds · music</text></g>
+  <path class="line" d="M438 104h24"/>
+  <g transform="translate(466 60)"><rect class="gate" width="190" height="88" rx="12"/><text class="n" x="18" y="34">Save present?</text><text class="s" x="18" y="58">yes: load saves/save.yaml</text><text class="s" x="18" y="76">no: start boatScene</text></g>
+  <path class="line" d="M656 104h24"/>
+  <g transform="translate(684 60)"><rect class="hot" width="190" height="88" rx="12"/><text class="n" x="18" y="34">Build scene</text><text class="s" x="18" y="58">SceneBuilder reads the</text><text class="s" x="18" y="76">map YAML in order</text></g>
+  <path class="line" d="M874 104h24"/>
+  <g transform="translate(902 60)"><rect class="box" width="178" height="88" rx="12"/><text class="n" x="18" y="34">Initialize</text><text class="s" x="18" y="58">object INIT hooks,</text><text class="s" x="18" y="76">init.lua (+ opening)</text></g>
+
+  <text class="h" x="40" y="214">EVERY FRAME · GameController::Update, then Render</text>
+  <g transform="translate(40 230)"><rect class="gate" width="190" height="112" rx="12"/><text class="n" x="18" y="34">Menu open?</text><text class="s" x="18" y="58">Only the menu updates.</text><text class="s" x="18" y="76">The world is frozen</text><text class="s" x="18" y="94">until you close it.</text></g>
+  <path class="line" d="M230 286h24"/>
+  <g transform="translate(258 230)"><rect class="hot" width="200" height="112" rx="12"/><text class="n" x="18" y="34">Update the scene</text><text class="s" x="18" y="58">move · cutscene actions</text><text class="s" x="18" y="76">camera · objects · weather</text><text class="s" x="18" y="94">No input in dialogue/cutscene</text></g>
+  <path class="line" d="M458 286h24"/>
+  <g transform="translate(486 230)"><rect class="box" width="200" height="112" rx="12"/><text class="n" x="18" y="34">Apply Lua requests</text><text class="s" x="18" y="58">spawn · destroy · fade</text><text class="s" x="18" y="76">ground-region changes</text><text class="s" x="18" y="94">then check region entry</text></g>
+  <path class="line" d="M686 286h24"/>
+  <g transform="translate(714 230)"><rect class="gate" width="180" height="112" rx="12"/><text class="n" x="18" y="34">Leaving?</text><text class="s" x="18" y="58">warp → scene change</text><text class="s" x="18" y="76">StartBattle → arena</text><text class="s" x="18" y="94">(adds your X / Y)</text></g>
+  <path class="line" d="M894 286h24"/>
+  <g transform="translate(922 230)"><rect class="box" width="158" height="112" rx="12"/><text class="n" x="18" y="34">Render</text><text class="s" x="18" y="58">world layers</text><text class="s" x="18" y="76">weather · prompts</text><text class="s" x="18" y="94">dialogue · menu · fade</text></g>
+
+  <path class="back" d="M804 230 V 190 H 779 V 152"/>
+  <text class="lbl" x="812" y="200">yes: unload, then build the next scene</text>
+  <path class="back" d="M1001 342 V 392 H 135 V 346"/>
+  <text class="lbl" x="420" y="386">next frame</text>
+
+  <g transform="translate(40 440)">
+    <rect class="box" width="1040" height="116" rx="12"/>
+    <text class="h" x="22" y="32">WHY THE ORDER MATTERS</text>
+    <text class="s" x="22" y="60">Lua never changes the world mid-loop. It queues requests, and C++ applies them in one place after every object has updated.</text>
+    <text class="s" x="22" y="84">A scene change destroys the old scene completely. Anything that must survive (stats, items, tags) lives in GameController.</text>
+    <text class="s" x="22" y="108">On quit, objects run their DESTROY hooks before the Lua runtime shuts down.</text>
+  </g>
+</svg>

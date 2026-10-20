@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 470" role="img" aria-labelledby="title desc">
+  <title id="title">Opening the storage door, one language at a time</title>
+  <desc id="desc">Five steps. YAML places the door with a trigger area and an INTERACT hook. C++ finds the nearest object in reach and catches the E press. The hook names a Lua script, or a rule table that picks one by tags. Lua checks for the key, shows dialogue, sets a tag, and asks for the door to go away. C++ changes the tag at once, and queues the world changes to apply after the frame, so the doorway now warps.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#9fb0bf"/></marker>
+    <style>
+      .bg{fill:#091522}
+      .card{fill:#102436;stroke-width:2}.yaml{stroke:#e9bc67}.cpp{stroke:#66d9df}.lua{stroke:#b9a1ff}
+      .chip{font:700 12px ui-monospace,monospace;letter-spacing:1.2px}
+      .n{fill:#f4f7f9;font:700 19px system-ui,sans-serif}.s{fill:#b6c4cf;font:14px system-ui,sans-serif}
+      .code{fill:#e9eef3;font:12.5px ui-monospace,monospace;white-space:pre}
+      .step{fill:#091522;font:800 14px system-ui,sans-serif;text-anchor:middle}
+      .arrow{fill:none;stroke:#9fb0bf;stroke-width:2;marker-end:url(#a)}
+      .foot{fill:#9fb0bf;font:14px system-ui,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="470" rx="18"/>
+  <text class="chip" fill="#66d9df" x="40" y="44">PRESS E AT THE STORAGE DOOR</text>
+
+  <g transform="translate(40 66)">
+    <rect class="card yaml" width="192" height="300" rx="14"/>
+    <circle cx="26" cy="28" r="14" fill="#e9bc67"/><text class="step" x="26" y="33">1</text>
+    <text class="chip" fill="#e9bc67" x="50" y="33">YAML</text>
+    <text class="n" x="18" y="74">Place the door</text>
+    <text class="s" x="18" y="100">Sprite, a trigger box</text>
+    <text class="s" x="18" y="120">and a hook for E.</text>
+    <text class="code" x="18" y="164">triggers:</text>
+    <text class="code" x="18" y="183">  interaction:</text>
+    <text class="code" x="18" y="202">    shape: rect</text>
+    <text class="code" x="18" y="230">hooks:</text>
+    <text class="code" x="18" y="249">  INTERACT:</text>
+    <text class="code" x="18" y="268">    script: …</text>
+  </g>
+  <path class="arrow" d="M236 216h18"/>
+
+  <g transform="translate(258 66)">
+    <rect class="card cpp" width="192" height="300" rx="14"/>
+    <circle cx="26" cy="28" r="14" fill="#66d9df"/><text class="step" x="26" y="33">2</text>
+    <text class="chip" fill="#66d9df" x="50" y="33">C++</text>
+    <text class="n" x="18" y="74">Who's in reach?</text>
+    <text class="s" x="18" y="100">Every frame, the closest</text>
+    <text class="s" x="18" y="120">object whose trigger holds</text>
+    <text class="s" x="18" y="140">your interactionPoint gets</text>
+    <text class="s" x="18" y="160">the E prompt.</text>
+    <text class="s" x="18" y="196">Pressing E calls its</text>
+    <text class="s" x="18" y="216">INTERACT hook.</text>
+    <text class="code" x="18" y="268">WorldScene::Update</text>
+  </g>
+  <path class="arrow" d="M454 216h18"/>
+
+  <g transform="translate(476 66)">
+    <rect class="card yaml" width="192" height="300" rx="14"/>
+    <circle cx="26" cy="28" r="14" fill="#e9bc67"/><text class="step" x="26" y="33">3</text>
+    <text class="chip" fill="#e9bc67" x="50" y="33">YAML</text>
+    <text class="n" x="18" y="74">Pick a script</text>
+    <text class="s" x="18" y="100">The door names one</text>
+    <text class="s" x="18" y="120">script directly.</text>
+    <text class="s" x="18" y="156">The crew use a rule table:</text>
+    <text class="s" x="18" y="176">the first rule whose tags</text>
+    <text class="s" x="18" y="196">all match wins.</text>
+    <text class="code" x="18" y="250">door/interact.lua</text>
+    <text class="code" x="18" y="268">crew1/dialog.rules.yaml</text>
+  </g>
+  <path class="arrow" d="M672 216h18"/>
+
+  <g transform="translate(694 66)">
+    <rect class="card lua" width="192" height="300" rx="14"/>
+    <circle cx="26" cy="28" r="14" fill="#b9a1ff"/><text class="step" x="26" y="33">4</text>
+    <text class="chip" fill="#b9a1ff" x="50" y="33">LUA</text>
+    <text class="n" x="18" y="74">Decide the meaning</text>
+    <text class="code" x="18" y="112">if not HasInventoryItem(</text>
+    <text class="code" x="18" y="130">  "storage_door_key")</text>
+    <text class="code" x="18" y="148">  → "It's locked."</text>
+    <text class="code" x="18" y="180">Say("The key turns…")</text>
+    <text class="code" x="18" y="198">SetTag("…door_open")</text>
+    <text class="code" x="18" y="216">SetGroundBehavior(</text>
+    <text class="code" x="18" y="234">  "storageDoor","warp")</text>
+    <text class="code" x="18" y="252">DestroyObject(…)</text>
+  </g>
+  <path class="arrow" d="M890 216h18"/>
+
+  <g transform="translate(912 66)">
+    <rect class="card cpp" width="168" height="300" rx="14"/>
+    <circle cx="26" cy="28" r="14" fill="#66d9df"/><text class="step" x="26" y="33">5</text>
+    <text class="chip" fill="#66d9df" x="50" y="33">C++</text>
+    <text class="n" x="18" y="74">Apply it safely</text>
+    <text class="s" x="18" y="100">Tags change at once.</text>
+    <text class="s" x="18" y="120">World changes wait in</text>
+    <text class="s" x="18" y="140">a queue; C++ checks</text>
+    <text class="s" x="18" y="160">and applies them later.</text>
+    <text class="s" x="18" y="196">The door is gone and</text>
+    <text class="s" x="18" y="216">the red doorway now</text>
+    <text class="s" x="18" y="236">warps to storage.</text>
+  </g>
+
+  <text class="foot" x="40" y="410"><tspan fill="#e9bc67" font-weight="700">YAML</tspan> says what exists ·  <tspan fill="#66d9df" font-weight="700">C++</tspan> runs the rules and owns the state ·  <tspan fill="#b9a1ff" font-weight="700">Lua</tspan> decides what it means right now</text>
+  <text class="foot" x="40" y="436">Lua never touches a C++ object directly; it calls a small set of functions that C++ validates.</text>
+</svg>

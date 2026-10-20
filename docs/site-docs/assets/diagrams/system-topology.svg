@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 620" role="img" aria-labelledby="title desc">
+  <title id="title">RPG2002-Ship system topology</title>
+  <desc id="desc">Four ownership layers. Dependencies point down: Application to Game to Framework to Platform, and Game may also call Platform directly. Nothing below Game knows about the RPG, with YAML and Lua entering through game-controlled boundaries and native Windows technologies below Platform.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <style>
+      .bg{fill:#091522}.box{fill:#102436;stroke:#35536a;stroke-width:2}.game{fill:#12313a;stroke:#66d9df}.external{fill:#2a2619;stroke:#8a713c}.native{fill:#171d25;stroke:#516173}.label{fill:#f4f7f9;font:700 22px system-ui,sans-serif}.copy{fill:#9fb0bf;font:14px system-ui,sans-serif}.tag{fill:#66d9df;font:700 11px ui-monospace,monospace;letter-spacing:1.4px}.line{fill:none;stroke:#66d9df;stroke-width:2;marker-end:url(#arrow)}.skip{stroke-dasharray:4 5}.soft{fill:none;stroke:#8a713c;stroke-width:2;stroke-dasharray:7 7;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="620" rx="18"/>
+  <text class="tag" x="56" y="48">ARROWS POINT DOWN · NOTHING POINTS UP</text>
+  <g transform="translate(282 70)">
+    <rect class="box" width="556" height="92" rx="12"/>
+    <text class="label" x="28" y="39">Application</text>
+    <text class="copy" x="28" y="66">Win32 startup · configuration · frame timing · input translation</text>
+    <path class="line" d="M278 92v34"/>
+  </g>
+  <g transform="translate(282 196)">
+    <rect class="box game" width="556" height="106" rx="12"/>
+    <text class="label" x="28" y="42">Game</text>
+    <text class="copy" x="28" y="70">RPG scenes · objects · scripting · state · battle · UI · effects</text>
+    <text class="tag" x="449" y="35">RPG-SPECIFIC</text>
+    <path class="line" d="M278 106v34"/>
+  </g>
+  <g transform="translate(282 336)">
+    <rect class="box" width="556" height="92" rx="12"/>
+    <text class="label" x="28" y="39">Framework</text>
+    <text class="copy" x="28" y="66">Scenes · layers · objects · camera · collision · resources</text>
+    <path class="line" d="M278 92v34"/>
+  </g>
+  <g transform="translate(282 462)">
+    <rect class="box" width="556" height="92" rx="12"/>
+    <text class="label" x="28" y="39">Platform</text>
+    <text class="copy" x="28" y="66">Graphics · audio · device input · loaded assets · logging</text>
+  </g>
+  <g transform="translate(36 199)">
+    <rect class="external" width="190" height="98" rx="12"/>
+    <text class="label" x="22" y="39">YAML</text><text class="copy" x="22" y="65">definitions · placement</text>
+    <path class="soft" d="M190 49h50"/>
+  </g>
+  <g transform="translate(894 199)">
+    <rect class="external" width="190" height="98" rx="12"/>
+    <text class="label" x="22" y="39">Lua</text><text class="copy" x="22" y="65">contextual meaning</text>
+    <path class="soft" d="M0 49h-50"/>
+  </g>
+  <path class="line skip" d="M838 286 C 878 300, 878 492, 842 506"/>
+  <text class="copy" x="868" y="400">Game may skip</text>
+  <text class="copy" x="868" y="420">straight to Platform</text>
+  <text class="copy" x="868" y="440">(audio, graphics, log)</text>
+  <g transform="translate(282 582)">
+    <text class="tag" x="0" y="0">WINDOWS</text><text class="copy" x="86" y="0">Direct2D · DirectWrite · XAudio2 · WIC · Win32</text>
+  </g>
+</svg>

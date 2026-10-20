@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 600" role="img" aria-labelledby="title desc">
+  <title id="title">Into battle and back again</title>
+  <desc id="desc">A loop of six steps. The storage room trigger script sets a tag, makes the green tiles walkable, and calls StartBattle. A BattleRequest carries the two goblin IDs plus the storage room and your exact position. The storage room is destroyed and the arena is built. Victory writes XP and items into the persistent player state and inventory. A normal scene change request goes back to the storage room at your saved position. The rebuilt storage room reads the tag and keeps the tiles walkable. Persistent state in the middle is the only thing that lives through the whole loop.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <style>
+      .bg{fill:#091522}.box{fill:#102436;stroke:#35536a;stroke-width:2}.world{fill:#102436;stroke:#66d9df;stroke-width:2}
+      .battle{fill:#2b2324;stroke:#ef8e88;stroke-width:2}.msg{fill:#171d25;stroke:#516173;stroke-width:2;stroke-dasharray:6 5}
+      .state{fill:#2a2619;stroke:#e9bc67;stroke-width:2}
+      .h{font:700 12px ui-monospace,monospace;letter-spacing:1.3px}
+      .n{fill:#f4f7f9;font:700 18px system-ui,sans-serif}.s{fill:#b6c4cf;font:13.5px system-ui,sans-serif}
+      .m{fill:#e9eef3;font:12.5px ui-monospace,monospace;white-space:pre}
+      .line{fill:none;stroke:#66d9df;stroke-width:2.5;marker-end:url(#a)}
+      .link{fill:none;stroke:#e9bc67;stroke-width:1.5;stroke-dasharray:4 5}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="600" rx="18"/>
+
+  <g transform="translate(40 40)"><rect class="world" width="300" height="170" rx="14"/>
+    <text class="h" fill="#66d9df" x="20" y="30">1 · STORAGE ROOM</text><text class="n" x="20" y="60">Step on the green tiles</text>
+    <text class="m" x="20" y="92">SetTag("storageBattle_triggered")</text>
+    <text class="m" x="20" y="114">SetGroundBehavior(… "walkable")</text>
+    <text class="m" x="20" y="136">StartBattle({ "goblinSword",</text>
+    <text class="m" x="20" y="156">              "goblinClub" })</text></g>
+  <path class="line" d="M340 125h64"/>
+  <g transform="translate(410 40)"><rect class="msg" width="300" height="170" rx="14"/>
+    <text class="h" fill="#9fb0bf" x="20" y="30">2 · BATTLEREQUEST (A VALUE)</text><text class="n" x="20" y="60">A note, not a pointer</text>
+    <text class="s" x="20" y="92">enemies: goblinSword, goblinClub</text>
+    <text class="s" x="20" y="114">return to: storageRoom</text>
+    <text class="s" x="20" y="136">at: your exact X / Y</text>
+    <text class="s" x="20" y="158">(WorldScene adds these two)</text></g>
+  <path class="line" d="M710 125h64"/>
+  <g transform="translate(780 40)"><rect class="battle" width="300" height="170" rx="14"/>
+    <text class="h" fill="#ef8e88" x="20" y="30">3 · BATTLE ARENA</text><text class="n" x="20" y="60">Storage room is gone</text>
+    <text class="s" x="20" y="92">The old scene is destroyed and</text>
+    <text class="s" x="20" y="114">battlearena/map.yaml is built.</text>
+    <text class="s" x="20" y="136">Only the requested goblins</text>
+    <text class="s" x="20" y="158">are switched on.</text></g>
+  <path class="line" d="M930 210v158"/>
+
+  <g transform="translate(330 248)"><rect class="state" width="460" height="92" rx="14"/>
+    <text class="h" fill="#e9bc67" x="20" y="30">LIVES THROUGH THE WHOLE LOOP · GameController</text>
+    <text class="s" x="20" y="56">PlayerState (HP, MP, XP) · Inventory (item IDs) · GlobalState (tags)</text>
+    <text class="s" x="20" y="78">The arena uses the same PlayerState, so damage you take sticks.</text></g>
+  <path class="link" d="M790 300 C 850 300, 880 330, 880 372"/>
+  <path class="link" d="M330 300 C 260 300, 230 330, 230 372"/>
+
+  <g transform="translate(780 374)"><rect class="battle" width="300" height="170" rx="14"/>
+    <text class="h" fill="#ef8e88" x="20" y="30">4 · VICTORY</text><text class="n" x="20" y="60">Rewards are real</text>
+    <text class="s" x="20" y="92">+27 XP, Rusty Dagger and</text>
+    <text class="s" x="20" y="114">Crude Club go straight into</text>
+    <text class="s" x="20" y="136">PlayerState and Inventory.</text>
+    <text class="s" x="20" y="158">Press Enter to continue.</text></g>
+  <path class="line" d="M780 459h-64"/>
+  <g transform="translate(410 374)"><rect class="msg" width="300" height="170" rx="14"/>
+    <text class="h" fill="#9fb0bf" x="20" y="30">5 · SCENECHANGEREQUEST</text><text class="n" x="20" y="60">An ordinary trip home</text>
+    <text class="s" x="20" y="92">to: storageRoom</text>
+    <text class="s" x="20" y="114">playerX / playerY from step 2</text>
+    <text class="s" x="20" y="136">Same path a door warp</text>
+    <text class="s" x="20" y="158">or a loaded save uses.</text></g>
+  <path class="line" d="M410 459h-64"/>
+  <g transform="translate(40 374)"><rect class="world" width="300" height="170" rx="14"/>
+    <text class="h" fill="#66d9df" x="20" y="30">6 · STORAGE ROOM, REBUILT</text><text class="n" x="20" y="60">Back where you stood</text>
+    <text class="s" x="20" y="92">Built fresh from its map.</text>
+    <text class="s" x="20" y="114">init.lua sees the tag and</text>
+    <text class="s" x="20" y="136">keeps the tiles walkable,</text>
+    <text class="s" x="20" y="158">so the fight never repeats.</text></g>
+  <text class="s" x="40" y="578">No scene stack and nothing paused in the background: the return works because the request carries your position and the tag remembers the fight.</text>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 600" role="img" aria-labelledby="title desc">
+  <title id="title">One round of combat</title>
+  <desc id="desc">Your turn: choose Attack and a goblin. C++ checks the move. The swing plays, and on the move's impact frame the sound, the hit reaction and the damage happen once. After both animations finish, the game checks the outcome. Zero HP means defeat. No goblins left means victory. Otherwise only the goblin you hit answers: its Lua script proposes a move and target from copied stats, C++ runs the same checks and the same swing, and it is your turn again.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <style>
+      .bg{fill:#091522}.box{fill:#102436;stroke:#35536a;stroke-width:2}.you{fill:#12313a;stroke:#66d9df;stroke-width:2}
+      .foe{fill:#211c33;stroke:#b9a1ff;stroke-width:2}.gate{fill:#2a2619;stroke:#e9bc67;stroke-width:2}
+      .win{fill:#14301f;stroke:#7bd7a8;stroke-width:2}.lose{fill:#2b2324;stroke:#ef8e88;stroke-width:2}
+      .h{font:700 12px ui-monospace,monospace;letter-spacing:1.3px}
+      .n{fill:#f4f7f9;font:700 18px system-ui,sans-serif}.s{fill:#b6c4cf;font:13.5px system-ui,sans-serif}
+      .m{fill:#e9bc67;font:13px ui-monospace,monospace;white-space:pre}
+      .line{fill:none;stroke:#66d9df;stroke-width:2.5;marker-end:url(#a)}
+      .lbl{fill:#f4f7f9;font:600 13px system-ui,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="600" rx="18"/>
+
+  <g transform="translate(40 40)"><rect class="you" width="220" height="150" rx="14"/>
+    <text class="h" fill="#66d9df" x="18" y="30">YOUR TURN</text><text class="n" x="18" y="60">Attack → a goblin</text>
+    <text class="s" x="18" y="90">Only Attack is enabled.</text>
+    <text class="s" x="18" y="110">It uses your first affordable</text>
+    <text class="s" x="18" y="130">damage move: strike.</text></g>
+  <path class="line" d="M260 115h40"/>
+  <g transform="translate(306 40)"><rect class="gate" width="220" height="150" rx="14"/>
+    <text class="h" fill="#e9bc67" x="18" y="30">C++ CHECKS THE MOVE</text>
+    <text class="s" x="18" y="58">✓ loaded and known to you</text>
+    <text class="s" x="18" y="80">✓ damages an opponent</text>
+    <text class="s" x="18" y="102">✓ target is alive</text>
+    <text class="s" x="18" y="124">✓ enough MP → spend it</text></g>
+  <path class="line" d="M526 115h40"/>
+  <g transform="translate(572 40)"><rect class="box" width="240" height="150" rx="14"/>
+    <text class="h" fill="#66d9df" x="18" y="30">THE SWING</text><text class="n" x="18" y="60">Impact on frame 3</text>
+    <text class="s" x="18" y="90">Sound, hit reaction and damage</text>
+    <text class="s" x="18" y="110">land exactly once, then the game</text>
+    <text class="s" x="18" y="130">waits for both animations.</text></g>
+  <path class="line" d="M812 115h40"/>
+  <g transform="translate(858 40)"><rect class="box" width="222" height="150" rx="14"/>
+    <text class="h" fill="#9fb0bf" x="18" y="30">DAMAGE</text>
+    <text class="m" x="18" y="62">max(1, round(atk × power)</text>
+    <text class="m" x="18" y="82">       − defense)</text>
+    <text class="s" x="18" y="112">You → goblins: 10 or 9</text>
+    <text class="s" x="18" y="132">Goblins → you: 3 or 4</text></g>
+  <path class="line" d="M969 190v40"/>
+
+  <g transform="translate(830 236)"><rect class="gate" width="250" height="70" rx="14"/>
+    <text class="n" x="18" y="30">What happened?</text><text class="s" x="18" y="52">checked after every swing</text></g>
+  <path class="line" d="M1080 290 C 1100 310, 1100 330, 1080 350"/>
+  <g transform="translate(830 340)"><rect class="win" width="250" height="84" rx="14"/>
+    <text class="h" fill="#7bd7a8" x="18" y="30">NO GOBLINS LEFT</text><text class="n" x="18" y="60">Victory</text></g>
+  <g transform="translate(830 440)"><rect class="lose" width="250" height="84" rx="14"/>
+    <text class="h" fill="#ef8e88" x="18" y="30">YOUR HP IS 0</text><text class="n" x="18" y="60">Defeat (end of slice)</text></g>
+  <path class="line" d="M1080 290 C 1110 330, 1110 440, 1082 480"/>
+
+  <path class="line" d="M830 271h-60"/>
+  <text class="lbl" x="700" y="226">a goblin is still up</text>
+  <g transform="translate(440 236)"><rect class="foe" width="324" height="170" rx="14"/>
+    <text class="h" fill="#b9a1ff" x="18" y="30">THE GOBLIN YOU HIT ANSWERS</text>
+    <text class="s" x="18" y="60">Its .battle.lua gets copies of the stats</text>
+    <text class="s" x="18" y="80">and returns a move and a target.</text>
+    <text class="m" x="18" y="112">return { move = "swordStrike",</text>
+    <text class="m" x="18" y="132">         target = battle.player.id }</text>
+    <text class="s" x="18" y="158">Same checks, same swing.</text></g>
+  <path class="line" d="M440 321 H 150 V 196"/>
+  <text class="lbl" x="200" y="312">back to your turn</text>
+
+  <text class="s" x="40" y="470">Only the goblin you hit fights back; the other one waits.</text>
+  <text class="s" x="40" y="494">Lua can only suggest. C++ alone changes HP, MP, the phase and the rewards.</text>
+  <text class="s" x="40" y="518">Magic, Item and Run are drawn in the menu but not enabled yet.</text>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 640" role="img" aria-labelledby="title desc">
+  <title id="title">Following crew member 1 through the files</title>
+  <desc id="desc">The boat map registers the crew sprite file and the crew1 object file under short IDs, then places crew1 in the actors layer. The sprite file points to crew.png. The object file names its sprite by ID and points to two rule tables, and the dialogue rule table points to one Lua file per situation. One of those scripts spawns the storage key at runtime by file path, and the key's sprite ID must already be registered by the boat map. Gold solid arrows open a file; cyan dashed arrows look up something already loaded by ID.</desc>
+  <defs>
+    <marker id="p" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#e9bc67"/></marker>
+    <marker id="i" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <style>
+      .bg{fill:#091522}.box{fill:#102436;stroke:#35536a;stroke-width:2}.root{fill:#12313a;stroke:#66d9df;stroke-width:2}
+      .media{fill:#2a2619;stroke:#8a713c;stroke-width:2}.lua{fill:#211c33;stroke:#b9a1ff;stroke-width:2}
+      .h{fill:#9fb0bf;font:700 11.5px ui-monospace,monospace;letter-spacing:1.2px}
+      .n{fill:#f4f7f9;font:700 16px ui-monospace,monospace}.s{fill:#b6c4cf;font:13px system-ui,sans-serif}
+      .m{fill:#e9eef3;font:12.5px ui-monospace,monospace;white-space:pre}.hl{fill:#e9bc67}.hi{fill:#66d9df}
+      .path{fill:none;stroke:#e9bc67;stroke-width:2.2;marker-end:url(#p)}
+      .id{fill:none;stroke:#66d9df;stroke-width:2.2;stroke-dasharray:7 5;marker-end:url(#i)}
+      .key{fill:#9fb0bf;font:13px system-ui,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="640" rx="18"/>
+
+  <g transform="translate(40 40)"><rect class="root" width="320" height="330" rx="14"/>
+    <text class="h" x="18" y="28">SCENE MAP · THE LOCAL REGISTRY</text>
+    <text class="n" x="18" y="54">boatscene/map.yaml</text>
+    <text class="m" x="18" y="92">resources:</text>
+    <text class="m" x="18" y="112">  sprites:</text>
+    <text class="m hl" x="18" y="132">    crew → crew.anim.yaml</text>
+    <text class="m hl" x="18" y="152">    storageDoorKey → key.anim…</text>
+    <text class="m" x="18" y="172">  objects:</text>
+    <text class="m hl" x="18" y="192">    crew1 → crew1.obj.yaml</text>
+    <text class="m" x="18" y="232">layers:</text>
+    <text class="m" x="18" y="252">  actors: (sort: y)</text>
+    <text class="m hi" x="18" y="272">    - obj: crew1</text>
+    <text class="m" x="18" y="292">      x: 720, y: 400</text>
+  </g>
+
+  <g transform="translate(440 40)"><rect class="box" width="270" height="110" rx="14"/>
+    <text class="h" x="18" y="28">SPRITE DEFINITION</text>
+    <text class="n" x="18" y="54">crew.anim.yaml</text>
+    <text class="s" x="18" y="78">5 × 4 sheet · idleDown, walkLeft…</text>
+    <text class="m hl" x="18" y="98">image: crew.png</text></g>
+  <path class="path" d="M300 168 C 380 168, 380 95, 434 95"/>
+
+  <g transform="translate(800 40)"><rect class="media" width="280" height="110" rx="14"/>
+    <text class="h" x="18" y="28">MEDIA</text><text class="n" x="18" y="54">crew.png</text>
+    <text class="s" x="18" y="80">the actual pixels</text></g>
+  <path class="path" d="M710 95h84"/>
+
+  <g transform="translate(440 200)"><rect class="box" width="270" height="170" rx="14"/>
+    <text class="h" x="18" y="28">OBJECT DEFINITION</text>
+    <text class="n" x="18" y="54">crew1.obj.yaml</text>
+    <text class="m" x="18" y="82">type: interactable</text>
+    <text class="m hi" x="18" y="102">sprite: crew</text>
+    <text class="m" x="18" y="122">hooks:</text>
+    <text class="m hl" x="18" y="142">  INTERACT: dialog.rules.yaml</text>
+    <text class="m hl" x="18" y="162">  DUTIES: duties.rules.yaml</text></g>
+  <path class="path" d="M300 228 C 380 228, 380 260, 434 260"/>
+  <path class="id" d="M500 296 C 470 220, 560 175, 575 156"/>
+
+  <g transform="translate(800 200)"><rect class="box" width="280" height="170" rx="14"/>
+    <text class="h" x="18" y="28">RULE TABLE · FIRST MATCH WINS</text>
+    <text class="n" x="18" y="54">dialog.rules.yaml</text>
+    <text class="s" x="18" y="82">fairies released? → dialog_fairies</text>
+    <text class="s" x="18" y="102">has lantern? → dialog_has_lantern</text>
+    <text class="s" x="18" y="122">…</text>
+    <text class="s" x="18" y="142">mission started? → dialog_find_key</text>
+    <text class="s" x="18" y="162">otherwise → dialog_start_mission</text></g>
+  <path class="path" d="M710 342h84"/>
+
+  <g transform="translate(800 420)"><rect class="lua" width="280" height="130" rx="14"/>
+    <text class="h" x="18" y="28">LUA · ONE FILE PER SITUATION</text>
+    <text class="n" x="18" y="54">dialog_start_mission.lua</text>
+    <text class="m" x="18" y="84">Say("Captain, the storage…")</text>
+    <text class="m" x="18" y="104">SetTag("mission_storageLantern")</text>
+    <text class="m hl" x="18" y="124">SpawnObject("…/storage_door_key…")</text></g>
+  <path class="path" d="M940 370v44"/>
+
+  <g transform="translate(440 420)"><rect class="box" width="270" height="130" rx="14"/>
+    <text class="h" x="18" y="28">SPAWNED AT RUNTIME</text>
+    <text class="n" x="18" y="54">storage_door_key.obj.yaml</text>
+    <text class="m" x="18" y="82">layer: actors</text>
+    <text class="m hi" x="18" y="102">sprite: storageDoorKey</text>
+    <text class="s" x="18" y="122">must already be in the map</text></g>
+  <path class="path" d="M800 520h-84"/>
+  <path class="id" d="M440 505 C 380 505, 392 196, 364 190"/>
+
+  <line x1="40" y1="590" x2="80" y2="590" stroke="#e9bc67" stroke-width="2.2"/><text class="key" x="90" y="595">opens a file by path</text>
+  <line x1="260" y1="590" x2="300" y2="590" stroke="#66d9df" stroke-width="2.2" stroke-dasharray="7 5"/><text class="key" x="310" y="595">looks up something already loaded, by ID</text>
+  <text class="key" x="40" y="400">The map decides which files get IDs in this scene.</text>
+  <text class="key" x="40" y="420">Definitions stay reusable: crew2 and crew3 share</text>
+  <text class="key" x="40" y="440">the same crew sprite under the same ID.</text>
+</svg>

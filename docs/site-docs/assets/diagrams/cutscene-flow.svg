@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 690" role="img" aria-labelledby="title desc">
+  <title id="title">The rain finale, one line at a time</title>
+  <desc id="desc">Each row pairs a line of rain_finale.lua with what WorldScene does about it. Lines marked with an hourglass put the Lua coroutine to sleep: walking six legs to the chest, the dialogue lines, waits, camera pans to each fire, fading each fire, and the final fade to black. Other lines take effect immediately. The script ends by changing to the ending scene.</desc>
+  <defs>
+    <style>
+      .bg{fill:#091522}.row{fill:#102436}.alt{fill:#0d1e2e}
+      .lua{fill:#e9eef3;font:13.5px ui-monospace,monospace;white-space:pre}.cmt{fill:#7f93a6}
+      .cpp{fill:#b6c4cf;font:13.5px system-ui,sans-serif}
+      .h{font:700 12px ui-monospace,monospace;letter-spacing:1.3px}
+      .wait{fill:#2a2619;stroke:#e9bc67;stroke-width:1.5}.waitText{fill:#e9bc67;font:700 11px ui-monospace,monospace}
+      .now{fill:#12313a;stroke:#66d9df;stroke-width:1.5}.nowText{fill:#66d9df;font:700 11px ui-monospace,monospace}
+      .end{fill:#2b2324;stroke:#ef8e88;stroke-width:1.5}.endText{fill:#ef8e88;font:700 11px ui-monospace,monospace}
+      .divider{stroke:#35536a;stroke-width:1.5}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="690" rx="18"/>
+  <text class="h" fill="#b9a1ff" x="40" y="42">LUA · crew3/rain_finale.lua</text>
+  <text class="h" fill="#66d9df" x="610" y="42">C++ · WorldScene, frame after frame</text>
+  <line class="divider" x1="590" y1="56" x2="590" y2="650"/>
+
+  <g transform="translate(24 60)">
+    <rect class="row" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">playerInput = false</text>
+    <rect class="now" x="486" y="12" width="64" height="20" rx="10"/><text class="nowText" x="518" y="26" text-anchor="middle">NOW</text>
+    <text class="cpp" x="586" y="27">Your controls, menu and inventory switch off.</text>
+  </g>
+  <g transform="translate(24 108)">
+    <rect class="alt" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">FollowObject(CurrentObjectId, 54, 74)</text>
+    <rect class="now" x="486" y="12" width="64" height="20" rx="10"/><text class="nowText" x="518" y="26" text-anchor="middle">NOW</text>
+    <text class="cpp" x="586" y="27">The camera stops tracking you and tracks the mage instead.</text>
+  </g>
+  <g transform="translate(24 156)">
+    <rect class="row" width="1072" height="64" rx="8"/>
+    <text class="lua" x="16" y="26">for each of 6 legs: PlayAnimation(walk…)</text>
+    <text class="lua" x="16" y="48">  MoveObjectTo(mage, leg.point, 150)</text>
+    <rect class="wait" x="486" y="22" width="64" height="20" rx="10"/><text class="waitText" x="518" y="36" text-anchor="middle">⧗ WAIT</text>
+    <text class="cpp" x="586" y="26">Slides the mage 150 px per second toward the waypoint.</text>
+    <text class="cpp" x="586" y="48">Wakes the script on arrival; the next leg picks a new facing.</text>
+  </g>
+  <g transform="translate(24 224)">
+    <rect class="alt" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">PlaySound("chestUnlock"); Say("Got it!")</text>
+    <rect class="wait" x="486" y="12" width="64" height="20" rx="10"/><text class="waitText" x="518" y="26" text-anchor="middle">⧗ WAIT</text>
+    <text class="cpp" x="586" y="27">Click of the chest, then a dialogue box. Sleeps until you press E.</text>
+  </g>
+  <g transform="translate(24 272)">
+    <rect class="row" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">SetTag("weather=rain", true)</text>
+    <rect class="now" x="486" y="12" width="64" height="20" rx="10"/><text class="nowText" x="518" y="26" text-anchor="middle">NOW</text>
+    <text class="cpp" x="586" y="27">The weather system sees the tag and starts the rain.</text>
+  </g>
+  <g transform="translate(24 320)">
+    <rect class="alt" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">Wait(1.0)</text>
+    <rect class="wait" x="486" y="12" width="64" height="20" rx="10"/><text class="waitText" x="518" y="26" text-anchor="middle">⧗ WAIT</text>
+    <text class="cpp" x="586" y="27">Counts down one second while the rain falls.</text>
+  </g>
+  <g transform="translate(24 368)">
+    <rect class="row" width="1072" height="110" rx="8"/>
+    <text class="lua" x="16" y="26">for each of 4 fires:</text>
+    <text class="lua" x="16" y="48">  MoveCameraTo(fire.focus, 1.0)</text>
+    <text class="lua" x="16" y="70">  Wait(1.0); PlaySound("boatFire")</text>
+    <text class="lua" x="16" y="92">  FadeOutObject(fire.object, 0.35)</text>
+    <rect class="wait" x="486" y="34" width="64" height="20" rx="10"/><text class="waitText" x="518" y="48" text-anchor="middle">⧗ WAIT</text>
+    <rect class="wait" x="486" y="56" width="64" height="20" rx="10"/><text class="waitText" x="518" y="70" text-anchor="middle">⧗ WAIT</text>
+    <rect class="wait" x="486" y="78" width="64" height="20" rx="10"/><text class="waitText" x="518" y="92" text-anchor="middle">⧗ WAIT</text>
+    <text class="cpp" x="586" y="48">Pans the camera to the fire over one second.</text>
+    <text class="cpp" x="586" y="70">Holds the shot for a beat, with a hiss.</text>
+    <text class="cpp" x="586" y="92">Fades the flame out, then DestroyObject removes it.</text>
+  </g>
+  <g transform="translate(24 482)">
+    <rect class="alt" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">SetTag("shipFinale_complete", true)</text>
+    <rect class="now" x="486" y="12" width="64" height="20" rx="10"/><text class="nowText" x="518" y="26" text-anchor="middle">NOW</text>
+    <text class="cpp" x="586" y="27">Marks the slice done. The line before cleared flames_active.</text>
+  </g>
+  <g transform="translate(24 530)">
+    <rect class="row" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">StopMusic(); FadeOutScene(1.5)</text>
+    <rect class="wait" x="486" y="12" width="64" height="20" rx="10"/><text class="waitText" x="518" y="26" text-anchor="middle">⧗ WAIT</text>
+    <text class="cpp" x="586" y="27">Music fades; a black overlay rises over everything, even dialogue.</text>
+  </g>
+  <g transform="translate(24 578)">
+    <rect class="alt" width="1072" height="44" rx="8"/>
+    <text class="lua" x="16" y="27">ChangeScene("ending")</text>
+    <rect class="end" x="486" y="12" width="64" height="20" rx="10"/><text class="endText" x="518" y="26" text-anchor="middle">LEAVE</text>
+    <text class="cpp" x="586" y="27">The boat is unloaded and EndingScene shows "To Be Continued".</text>
+  </g>
+  <text class="cpp" x="40" y="666" fill="#9fb0bf">⧗ = the script sleeps here and the game keeps running. If any action fails, the cutscene is cancelled and your controls come back.</text>
+</svg>

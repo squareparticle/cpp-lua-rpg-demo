@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 700" role="img" aria-labelledby="title desc">
+  <title id="title">Asset load order and lifetime</title>
+  <desc id="desc">GameController loads game-wide data and resources once. Scene replacement shuts down old objects and clears scene resources. SceneBuilder loads a new map in dependency order from metadata through resources, definitions, camera, and layers. Resource lookup prefers scene scope over game scope. Failed builds clear partial scene assets; Direct2D target recreation reloads GPU images from retained paths.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <marker id="goldArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#e9bc67"/></marker>
+    <style>
+      .bg{fill:#091522}.game{fill:#173229;stroke:#4c9a73;stroke-width:3}.scene{fill:#102436;stroke:#66d9df;stroke-width:3}.step{fill:#0d1d2c;stroke:#35536a;stroke-width:2}.gate{fill:#2a2619;stroke:#8a713c;stroke-width:2}.runtime{fill:#221c2e;stroke:#9f7ad1;stroke-width:2}.label{fill:#f4f7f9;font:700 16px system-ui}.copy{fill:#9fb0bf;font:13px system-ui}.small{fill:#93a4b5;font:12px system-ui}.tag{fill:#66d9df;font:700 11px ui-monospace;letter-spacing:1.1px}.gold{fill:#e9bc67}.green{fill:#7bd7a8}.purple{fill:#c9a7f2}.line{fill:none;stroke:#66d9df;stroke-width:2;marker-end:url(#arrow)}.goldLine{fill:none;stroke:#e9bc67;stroke-width:2;marker-end:url(#goldArrow)}.guide{fill:none;stroke:#53697a;stroke-width:1.5;stroke-dasharray:6 5}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="700" rx="18"/>
+  <text class="tag" x="48" y="42">LIFETIME AND BUILD ORDER</text>
+  <g transform="translate(48 72)"><rect class="game" width="302" height="198" rx="15"/><text class="tag green" x="20" y="31">GAME SCOPE · LOAD ONCE</text><text class="label" x="20" y="64">GameController</text><text class="copy" x="20" y="94">sounds + music</text><text class="copy" x="20" y="117">UI / weather images</text><text class="copy" x="20" y="140">item catalog + XP table</text><text class="small" x="20" y="170">survives every scene change</text></g>
+  <g transform="translate(48 318)"><rect class="gate" width="302" height="146" rx="15"/><text class="tag gold" x="20" y="31">SCENE REPLACEMENT</text><text class="label" x="20" y="64">UnloadCurrentScene</text><text class="copy" x="20" y="94">shutdown objects + Lua hooks</text><text class="copy" x="20" y="117">clear deferred work + scene assets</text></g>
+  <path class="goldLine" d="M350 391H408"/>
+
+  <g transform="translate(408 64)"><rect class="scene" width="664" height="458" rx="17"/><text class="tag" x="22" y="32">SCENE SCOPE · SCENEBUILDER</text>
+    <g transform="translate(22 56)"><rect class="step" width="184" height="78" rx="9"/><text class="tag" x="14" y="24">01</text><text class="label" x="14" y="49">Metadata</text><text class="small" x="14" y="68">ID · scripts · spawns</text></g>
+    <g transform="translate(240 56)"><rect class="step" width="184" height="78" rx="9"/><text class="tag" x="14" y="24">02</text><text class="label" x="14" y="49">Media</text><text class="small" x="14" y="68">images · sprites · masks · sounds</text></g>
+    <g transform="translate(458 56)"><rect class="step" width="184" height="78" rx="9"/><text class="tag" x="14" y="24">03</text><text class="label" x="14" y="49">Semantics</text><text class="small" x="14" y="68">regions · battle moves</text></g>
+    <path class="line" d="M206 95H240"/><path class="line" d="M424 95H458"/>
+    <g transform="translate(22 174)"><rect class="step" width="184" height="78" rx="9"/><text class="tag" x="14" y="24">04</text><text class="label" x="14" y="49">Templates</text><text class="small" x="14" y="68">load + merge .obj.yaml</text></g>
+    <g transform="translate(240 174)"><rect class="step" width="184" height="78" rx="9"/><text class="tag" x="14" y="24">05</text><text class="label" x="14" y="49">Camera</text><text class="small" x="14" y="68">window + target ID</text></g>
+    <g transform="translate(458 174)"><rect class="runtime" width="184" height="78" rx="9"/><text class="tag purple" x="14" y="24">06</text><text class="label" x="14" y="49">Layers</text><text class="small" x="14" y="68">create + place objects</text></g>
+    <path class="line" d="M550 134V152H114V174"/><path class="line" d="M206 213H240"/><path class="line" d="M424 213H458"/>
+    <g transform="translate(22 302)"><rect class="runtime" width="620" height="106" rx="11"/><text class="tag purple" x="16" y="27">ACTIVE SCENE</text><text class="label" x="16" y="56">Objects initialize, hooks run, scene init reconstructs state</text><text class="copy" x="16" y="81">resource lookup: scene ID first → game ID fallback</text></g>
+    <path class="line" d="M550 252V302"/>
+  </g>
+  <path class="guide" d="M350 170H382V416H408"/><text class="small" x="54" y="292">game scope remains available</text>
+  <g transform="translate(408 562)"><rect class="gate" width="310" height="88" rx="12"/><text class="tag gold" x="16" y="27">BUILD FAILURE</text><text class="label" x="16" y="55">Clear partial scene scope</text><text class="small" x="16" y="76">game scope remains intact</text></g>
+  <g transform="translate(762 562)"><rect class="step" width="310" height="88" rx="12"/><text class="tag" x="16" y="27">GRAPHICS TARGET LOSS</text><text class="label" x="16" y="55">Reload image-backed assets</text><text class="small" x="16" y="76">retained filenames → new Direct2D target</text></g>
+  <text class="copy" x="48" y="680">Scene resources retire with their objects, preventing references from one scene from leaking into the next.</text>
+</svg>

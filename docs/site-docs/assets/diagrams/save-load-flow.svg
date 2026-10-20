@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 700" role="img" aria-labelledby="title desc">
+  <title id="title">Save and guarded load flow</title>
+  <desc id="desc">Saving snapshots a WorldScene and persistent state to version 1 YAML. Loading parses into temporary data, applies file and game validation gates, unloads the old scene, replaces persistent state, builds the saved scene with player position overrides, and runs initialization to reconstruct visible consequences.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <marker id="goldArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#e9bc67"/></marker>
+    <style>
+      .bg{fill:#091522}.box{fill:#0d1d2c;stroke:#35536a;stroke-width:2}.gate{fill:#102436;stroke:#66d9df;stroke-width:2}.file{fill:#2a2619;stroke:#8a713c;stroke-width:2}.live{fill:#173229;stroke:#4c9a73;stroke-width:2}.label{fill:#f4f7f9;font:700 16px system-ui}.copy{fill:#9fb0bf;font:13px system-ui}.small{fill:#93a4b5;font:12px system-ui}.tag{fill:#66d9df;font:700 11px ui-monospace;letter-spacing:1.1px}.gold{fill:#e9bc67}.green{fill:#7bd7a8}.line{fill:none;stroke:#66d9df;stroke-width:2;marker-end:url(#arrow)}.goldLine{fill:none;stroke:#e9bc67;stroke-width:2;marker-end:url(#goldArrow)}.divider{stroke:#23394b;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="700" rx="18"/>
+  <text class="tag" x="48" y="42">SAVE · COMPACT SNAPSHOT</text>
+  <g transform="translate(48 66)"><rect class="box" width="226" height="118" rx="12"/><text class="tag" x="18" y="28">PAUSED MENU</text><text class="label" x="18" y="58">One-shot Save request</text><text class="copy" x="18" y="84">enabled only in WorldScene</text></g>
+  <g transform="translate(330 66)"><rect class="gate" width="270" height="118" rx="12"/><text class="tag" x="18" y="28">GAMECONTROLLER</text><text class="label" x="18" y="58">Collect live facts</text><text class="copy" x="18" y="84">state + scene + player X/Y</text></g>
+  <g transform="translate(656 66)"><rect class="gate" width="192" height="118" rx="12"/><text class="tag" x="18" y="28">SAVEGAME</text><text class="label" x="18" y="58">Validate + emit</text><text class="copy" x="18" y="84">version 1 YAML</text></g>
+  <g transform="translate(904 66)"><rect class="file" width="168" height="118" rx="12"/><text class="tag gold" x="18" y="28">LOCAL SLOT</text><text class="label" x="18" y="58">save.yaml</text><text class="copy" x="18" y="84">truncate + write</text></g>
+  <path class="line" d="M274 125H330"/><path class="line" d="M600 125H656"/><path class="goldLine" d="M848 125H904"/>
+  <line class="divider" x1="48" y1="228" x2="1072" y2="228"/>
+  <text class="tag" x="48" y="270">LOAD · VALIDATE BEFORE COMMIT</text>
+  <g transform="translate(48 298)"><rect class="file" width="168" height="122" rx="12"/><text class="tag gold" x="18" y="28">LOCAL SLOT</text><text class="label" x="18" y="58">save.yaml</text><text class="copy" x="18" y="84">startup or menu Load</text></g>
+  <g transform="translate(272 298)"><rect class="gate" width="232" height="122" rx="12"/><text class="tag" x="18" y="28">GATE 1 · FILE</text><text class="label" x="18" y="58">Temporary SaveGameData</text><text class="copy" x="18" y="82">schema · types · ranges</text><text class="copy" x="18" y="103">uniqueness · finite position</text></g>
+  <g transform="translate(560 298)"><rect class="gate" width="232" height="122" rx="12"/><text class="tag" x="18" y="28">GATE 2 · GAME</text><text class="label" x="18" y="58">Reference checks</text><text class="copy" x="18" y="82">XP table · item catalog</text><text class="copy" x="18" y="103">authored world scene IDs</text></g>
+  <g transform="translate(848 298)"><rect class="live" width="224" height="122" rx="12"/><text class="tag green" x="18" y="28">COMMIT POINT</text><text class="label" x="18" y="58">Unload old scene</text><text class="copy" x="18" y="82">then replace state contents</text><text class="small" x="18" y="104">no partial live mutation</text></g>
+  <path class="goldLine" d="M216 359H272"/><path class="line" d="M504 359H560"/><path class="line" d="M792 359H848"/>
+  <g transform="translate(146 500)"><rect class="box" width="252" height="126" rx="12"/><text class="tag" x="18" y="28">NORMAL SCENE ROUTE</text><text class="label" x="18" y="58">ChangeScene</text><text class="copy" x="18" y="83">saved scene ID</text><text class="copy" x="18" y="104">player X/Y overrides</text></g>
+  <g transform="translate(476 500)"><rect class="box" width="252" height="126" rx="12"/><text class="tag" x="18" y="28">CONSTRUCTION</text><text class="label" x="18" y="58">SceneBuilder</text><text class="copy" x="18" y="83">map YAML · layers · objects</text><text class="copy" x="18" y="104">ordinary INIT hooks</text></g>
+  <g transform="translate(806 500)"><rect class="live" width="266" height="126" rx="12"/><text class="tag green" x="18" y="28">RECONSTRUCTION</text><text class="label" x="18" y="58">Scene init Lua</text><text class="copy" x="18" y="83">reads tags + inventory facts</text><text class="copy" x="18" y="104">rebuilds visible consequences</text></g>
+  <path class="line" d="M960 420C960 466 272 456 272 500"/><path class="line" d="M398 563H476"/><path class="line" d="M728 563H806"/>
+  <text class="copy" x="48" y="670">A failure at either gate leaves the current playthrough intact. The live state changes only after the complete candidate is accepted.</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 720" role="img" aria-labelledby="title desc">
+  <title id="title">Concept correspondence between the 2002 prototype and modern rebuild</title>
+  <desc id="desc">Historical files provide behavioral evidence. A middle lane identifies the retained gameplay intent. The modern lane assigns that intent to new Application, Game, Framework, Platform, YAML, and Lua owners. Dotted arrows indicate correspondence rather than source or class inheritance.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <style>
+      .bg{fill:#091522}.legacy{fill:#292318;stroke:#a98548;stroke-width:2}.intent{fill:#132a2d;stroke:#66d9df;stroke-width:2}.modern{fill:#1d2437;stroke:#8fa7e8;stroke-width:2}.label{fill:#f4f7f9;font:700 15px system-ui}.copy{fill:#a9b8c6;font:12px system-ui}.tag{fill:#66d9df;font:700 11px ui-monospace;letter-spacing:1.1px}.gold{fill:#e9bc67}.violet{fill:#b8c4f4}.edge{fill:none;stroke:#66d9df;stroke-width:1.7;stroke-dasharray:5 5;marker-end:url(#arrow)}.rail{fill:none;stroke:#365064;stroke-width:2}.note{fill:#8498aa;font:12px system-ui}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="720" rx="18"/>
+  <text class="tag gold" x="42" y="42">2002 EVIDENCE · READ ONLY</text><text class="tag" x="424" y="42">RETAINED INTENT</text><text class="tag violet" x="760" y="42">MODERN OWNER · NEW DESIGN</text>
+  <path class="rail" d="M392 60V644M730 60V644"/>
+
+  <g transform="translate(42 78)"><rect class="legacy" width="310" height="82" rx="11"/><text class="label" x="16" y="29">WinMain · state manager</text><text class="copy" x="16" y="52">timer loop · global modes · cleanup</text></g>
+  <g transform="translate(424 78)"><rect class="intent" width="266" height="82" rx="11"/><text class="label" x="16" y="29">Run one RPG safely</text><text class="copy" x="16" y="52">startup · update · presentation</text></g>
+  <g transform="translate(760 78)"><rect class="modern" width="318" height="82" rx="11"/><text class="label" x="16" y="29">Application + GameController</text><text class="copy" x="16" y="52">native boundary + RPG coordinator</text></g>
+
+  <g transform="translate(42 184)"><rect class="legacy" width="310" height="82" rx="11"/><text class="label" x="16" y="29">DirectDraw · three layers</text><text class="copy" x="16" y="52">surfaces · camera offsets · hero pass</text></g>
+  <g transform="translate(424 184)"><rect class="intent" width="266" height="82" rx="11"/><text class="label" x="16" y="29">Layered ship world</text><text class="copy" x="16" y="52">ordered depth + camera framing</text></g>
+  <g transform="translate(760 184)"><rect class="modern" width="318" height="82" rx="11"/><text class="label" x="16" y="29">Graphics · Layers · Camera</text><text class="copy" x="16" y="52">Direct2D + YAML composition</text></g>
+
+  <g transform="translate(42 290)"><rect class="legacy" width="310" height="82" rx="11"/><text class="label" x="16" y="29">HERO · back.bmp mask</text><text class="copy" x="16" y="52">movement · frames · collision trigger</text></g>
+  <g transform="translate(424 290)"><rect class="intent" width="266" height="82" rx="11"/><text class="label" x="16" y="29">Walk and discover</text><text class="copy" x="16" y="52">animated actor + meaningful places</text></g>
+  <g transform="translate(760 290)"><rect class="modern" width="318" height="82" rx="11"/><text class="label" x="16" y="29">Player · Collision · Regions</text><text class="copy" x="16" y="52">explicit anchors + semantic colors</text></g>
+
+  <g transform="translate(42 396)"><rect class="legacy" width="310" height="82" rx="11"/><text class="label" x="16" y="29">.map · .spt token commands</text><text class="copy" x="16" y="52">mutate globals · delay · message</text></g>
+  <g transform="translate(424 396)"><rect class="intent" width="266" height="82" rx="11"/><text class="label" x="16" y="29">Author events as data</text><text class="copy" x="16" y="52">placement + contextual sequences</text></g>
+  <g transform="translate(760 396)"><rect class="modern" width="318" height="82" rx="11"/><text class="label" x="16" y="29">YAML + Lua + C++ validation</text><text class="copy" x="16" y="52">definitions · meaning · authority</text></g>
+
+  <g transform="translate(42 502)"><rect class="legacy" width="310" height="82" rx="11"/><text class="label" x="16" y="29">Message · weather · overlay</text><text class="copy" x="16" y="52">window state · particles · menu art</text></g>
+  <g transform="translate(424 502)"><rect class="intent" width="266" height="82" rx="11"/><text class="label" x="16" y="29">Present RPG feedback</text><text class="copy" x="16" y="52">dialogue · effects · choices</text></g>
+  <g transform="translate(760 502)"><rect class="modern" width="318" height="82" rx="11"/><text class="label" x="16" y="29">Dialogue · Weather · Menus</text><text class="copy" x="16" y="52">game-owned systems + UI states</text></g>
+
+  <path class="edge" d="M352 119H424"/><path class="edge" d="M690 119H760"/>
+  <path class="edge" d="M352 225H424"/><path class="edge" d="M690 225H760"/>
+  <path class="edge" d="M352 331H424"/><path class="edge" d="M690 331H760"/>
+  <path class="edge" d="M352 437H424"/><path class="edge" d="M690 437H760"/>
+  <path class="edge" d="M352 543H424"/><path class="edge" d="M690 543H760"/>
+  <text class="note" x="42" y="640">Dotted arrows mean “corresponds in intent.” No legacy class, ownership model, or source dependency crosses into the modern tree.</text>
+  <text class="tag" x="42" y="676">BEHAVIOR SURVIVES · IMPLEMENTATION IS RE-AUTHORED</text>
+</svg>

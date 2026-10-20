@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 640" role="img" aria-labelledby="title desc">
+  <title id="title">Who owns what at runtime</title>
+  <desc id="desc">GameController owns the long-lived pieces: persistent state, the Lua system, the resource manager, dialogue and menus, and exactly one active scene. Scenes come in two families: WorldScene, with BoatScene and StorageRoomScene as thin subclasses that only pick a map file, BattleArenaScene, and EndingScene, which only draws the closing card. Every scene owns ordered layers, and object layers own the game objects. SceneBuilder turns a map YAML file into a scene. SceneChangeRequest and BattleRequest are small values that carry information across a scene replacement.</desc>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#66d9df"/></marker>
+    <marker id="p" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 8 4 0 8Z" fill="#b9a1ff"/></marker>
+    <style>
+      .bg{fill:#091522}.owner{fill:#102b36;stroke:#66d9df;stroke-width:3}.box{fill:#102436;stroke:#35536a;stroke-width:2}
+      .scene{fill:#1d2437;stroke:#8fa7e8;stroke-width:2}.thin{fill:#141b2b;stroke:#8fa7e8;stroke-width:1.5;stroke-dasharray:5 4}
+      .build{fill:#2a2619;stroke:#9f7b3f;stroke-width:2}.req{fill:#211c33;stroke:#b9a1ff;stroke-width:2}
+      .n{fill:#f4f7f9;font:700 16px system-ui,sans-serif}.s{fill:#a7b7c5;font:12.5px system-ui,sans-serif}
+      .h{fill:#66d9df;font:700 11px ui-monospace,monospace;letter-spacing:1.2px}
+      .own{fill:none;stroke:#667f91;stroke-width:2}.is{fill:none;stroke:#8fa7e8;stroke-width:2;marker-end:url(#a)}
+      .dash{fill:none;stroke:#b9a1ff;stroke-width:2;stroke-dasharray:6 5;marker-end:url(#p)}
+      .note{fill:#9fb0bf;font:13px system-ui,sans-serif}
+    </style>
+  </defs>
+  <rect class="bg" width="1120" height="640" rx="18"/>
+  <text class="h" x="40" y="40">SOLID LINES OWN · ARROWS MEAN "IS A KIND OF" · DASHED = A VALUE PASSED ALONG</text>
+
+  <g transform="translate(410 60)"><rect class="owner" width="300" height="70" rx="14"/>
+    <text class="n" x="20" y="30">GameController</text><text class="s" x="20" y="52">lives for the whole run</text></g>
+  <path class="own" d="M560 130v20H110v20M330 150v20M560 150v20M790 150v20M1010 150v20"/>
+
+  <g transform="translate(40 170)"><rect class="box" width="150" height="84" rx="12"/><text class="n" x="16" y="30">State</text><text class="s" x="16" y="52">PlayerState</text><text class="s" x="16" y="70">Inventory · tags</text></g>
+  <g transform="translate(250 170)"><rect class="box" width="160" height="84" rx="12"/><text class="n" x="16" y="30">LuaSystem</text><text class="s" x="16" y="52">one Lua runtime</text><text class="s" x="16" y="70">request queues</text></g>
+  <g transform="translate(470 170)"><rect class="box" width="180" height="84" rx="12"/><text class="n" x="16" y="30">ResourceManager</text><text class="s" x="16" y="52">IDs → images, sprites,</text><text class="s" x="16" y="70">masks, sounds</text></g>
+  <g transform="translate(710 170)"><rect class="box" width="160" height="84" rx="12"/><text class="n" x="16" y="30">UI</text><text class="s" x="16" y="52">dialogue window</text><text class="s" x="16" y="70">pause menu</text></g>
+  <g transform="translate(930 170)"><rect class="owner" width="150" height="84" rx="12"/><text class="n" x="16" y="30">Active scene</text><text class="s" x="16" y="52">exactly one</text><text class="s" x="16" y="70">at a time</text></g>
+
+  <g transform="translate(830 300)"><rect class="scene" width="250" height="84" rx="12"/><text class="h" x="16" y="24">FRAMEWORK</text><text class="n" x="16" y="48">BaseScene</text><text class="s" x="16" y="68">layers · camera · update · render</text></g>
+  <path class="own" d="M1005 254v46"/>
+
+  <g transform="translate(520 420)"><rect class="scene" width="260" height="84" rx="12"/><text class="h" x="16" y="24">GAME</text><text class="n" x="16" y="48">WorldScene</text><text class="s" x="16" y="68">player · mask · regions · E · cutscenes</text></g>
+  <g transform="translate(830 420)"><rect class="scene" width="250" height="84" rx="12"/><text class="h" x="16" y="24">GAME</text><text class="n" x="16" y="48">BattleArenaScene</text><text class="s" x="16" y="68">turns · damage · rewards</text></g>
+  <path class="is" d="M650 420 V 342 H 824"/>
+  <path class="is" d="M955 420 V 390"/>
+  <g transform="translate(520 540)"><rect class="thin" width="125" height="60" rx="10"/><text class="n" x="14" y="26">BoatScene</text><text class="s" x="14" y="46">map + mask ID</text></g>
+  <g transform="translate(655 540)"><rect class="thin" width="125" height="60" rx="10"/><text class="n" x="14" y="26">StorageRoom…</text><text class="s" x="14" y="46">map + mask ID</text></g>
+  <path class="is" d="M582 540v-30M717 540v-30"/>
+  <g transform="translate(830 540)"><rect class="scene" width="220" height="60" rx="10"/><text class="n" x="14" y="26">EndingScene</text><text class="s" x="14" y="46">"To Be Continued" card</text></g>
+  <path class="is" d="M1050 570 H 1098 V 342 H 1086"/>
+
+  <g transform="translate(40 300)"><rect class="box" width="210" height="84" rx="12"/><text class="n" x="16" y="30">Layers</text><text class="s" x="16" y="52">ImageLayer · ObjectLayer</text><text class="s" x="16" y="70">drawn in YAML order</text></g>
+  <g transform="translate(300 300)"><rect class="box" width="210" height="84" rx="12"/><text class="n" x="16" y="30">Game objects</text><text class="s" x="16" y="52">player · interactable · enemy</text><text class="s" x="16" y="70">owned by their object layer</text></g>
+  <path class="own" d="M830 330 H 780 V 290 H 145 V 300"/>
+  <path class="own" d="M250 342h50"/>
+
+  <g transform="translate(40 420)"><rect class="build" width="210" height="84" rx="12"/><text class="n" x="16" y="30">SceneBuilder</text><text class="s" x="16" y="52">map.yaml → a ready scene</text><text class="s" x="16" y="70">(not kept afterwards)</text></g>
+  <g transform="translate(40 540)"><rect class="req" width="210" height="60" rx="10"/><text class="n" x="16" y="26">SceneChangeRequest</text><text class="s" x="16" y="46">where to + small payload</text></g>
+  <g transform="translate(270 540)"><rect class="req" width="210" height="60" rx="10"/><text class="n" x="16" y="26">BattleRequest</text><text class="s" x="16" y="46">goblin IDs + way home</text></g>
+  <path class="dash" d="M480 570 C 500 570, 500 470, 514 466"/>
+  <text class="note" x="290" y="460">a scene hands these to</text>
+  <text class="note" x="290" y="478">GameController on its way out</text>
+</svg>
