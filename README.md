@@ -6,6 +6,11 @@ RPG2002 is a modern reconstruction of a C++ RPG prototype originally developed a
 
 [Watch the gameplay demo on YouTube](https://youtu.be/_nqrkBS6GLw).
 
+## Documentation
+
+Read the project's architecture and implementation documentation on
+[GitHub Pages](https://squareparticle.github.io/cpp-lua-rpg-demo/site-docs/).
+
 ## Build and run
 
 RPG2002-Ship currently targets 64-bit Windows. To build it from source, install:
@@ -63,11 +68,6 @@ help wire in dependencies and commodity boilerplate, including Direct2D,
 audio, and application-launcher code. I created the artwork and enhanced it
 using AI, used AI-generated sounds, and collaborated with AI on the automated
 tests.
-
-## Documentation
-
-Read the project's architecture and implementation documentation on
-[GitHub Pages](https://squareparticle.github.io/RPG2002-Ship/site-docs/).
 
 ## License
 
